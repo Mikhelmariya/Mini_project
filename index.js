@@ -51,7 +51,10 @@ app.post("/webhooks",(req,res)=>{
                 let msg_body = body_param.entry[0].changes[0].values.messages[0].text.body;  
                 
         console.log("Phone no id"+phone_no_id);
+        res.send(phone_no_id)
         console.log("body param"+msg_body);
+        res.send(msg_body)
+
 
                 
              
@@ -81,7 +84,7 @@ app.post("/webhooks",(req,res)=>{
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
 
-    res.send('Here is some / for you')
+    res.send('Here is something for you')
     
     res.status(200).send("This is webhook setting up");
     
