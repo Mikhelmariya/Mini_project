@@ -11,6 +11,9 @@ app.listen(process.env.PORT,()=> {
 
 
 app.get("/webhook",(req,res)=>{
+    console.log(`${req.ip} is asking for webhooks`)
+
+    res.send('Here is webhooks for you')
   let mode =req.query["hub.mode"];
   let challenge =req.query["hub.challenge"];
  let token= req.query["hub.verify_token"];
@@ -76,5 +79,10 @@ app.post("/webhooks",(req,res)=>{
     }
 });
 app.get("/",(req,res)=>{
+    console.log(`${req.ip} is asking for /`)
+
+    res.send('Here is some / for you')
+    
     res.status(200).send("This is webhook setting up");
+    
 });
