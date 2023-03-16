@@ -25,7 +25,7 @@ if(mode && token){
     console.log(`${req.ip} mode and token done`)
     if(mode=="subscribe" && token==mytoken){
         console.log(`${req.ip} mytoken done`)
-        res.status(200).send(challenge);
+        res.status(200).send("mode and token verified");
     }
     else{
         res.status(403);
