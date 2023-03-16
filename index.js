@@ -22,7 +22,9 @@ app.get("/webhook",(req,res)=>{
  console.log("0");
 //  const mytoken =process.env.MYTOKEN;
 //  const accesstoken = process.env.TOKEN;
- 
+ console.log("mode :"+mode);
+ console.log("token :"+token);
+ console.log("mytoken :"+myTocken);
 if(mode && token){
     console.log("1")
     if(mode == "subscribe" && token == myTocken){
