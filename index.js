@@ -29,6 +29,7 @@ if(mode && token){
     }
     else{
         res.status(403);
+        console.log(`${req.ip} mode and token done not done`)
     }
 }
 
