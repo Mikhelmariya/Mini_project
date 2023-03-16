@@ -14,12 +14,12 @@ app.get("/webhook",(req,res)=>{
     console.log(`${req.ip} is asking for webhooks`)
 
     res.send('Here is webhooks for you')
-  let mode =req.query["hub.mode"];
-  let challenge =req.query["hub.challenge"];
- let token= req.query["hub.verify_token"];
+  let mode=req.query["hub.mode"];
+  let challenge=req.query["hub.challenge"];
+ let token=req.query["hub.verify_token"];
 
- const mytoken =process.env.mytoken;
- const accesstoken = process.env.accesstoken;
+ const mytoken =process.env.MYTOKEN;
+ const accesstoken = process.env.TOKEN;
  
 if(mode && token){
     console.log(`${req.ip} mode and token done`)
