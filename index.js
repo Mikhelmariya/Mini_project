@@ -1,13 +1,15 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
+
+const port=process.env.PORT || 8000;
+const app=express();
 require('dotenv').config();
 
-const app = express().use(body_parser.json());
+ app.use(express.json());
 
-app.listen(process.env.PORT,()=> {
-    console.log("webhook is listening");
-});
+ const tocken="EAAKcYncP8UUBAIWCikOtxiZBooveKpidB05fhjIylnt497ZC3fydPhj6DNAmfS7dMDcrb8zydAGMBTwnQQGcXLTVkRlUYMZBagwWm1F9PVXZAMD4XF74cYBuS7ZAkEtiesW1FYkXNXcsULdn4iaCQG78VTOctdt6jCSWr640XBXxNH3bqi8feDne5AOmjP5zA8m7GMbXOGgZDZD"
+ const myTocken="mikhel"
 
 
 app.get("/webhook",(req,res)=>{
@@ -17,15 +19,15 @@ app.get("/webhook",(req,res)=>{
   let mode=req.query["hub.mode"];
   let challenge=req.query["hub.challenge"];
  let token=req.query["hub.verify_token"];
-
- const mytoken =process.env.MYTOKEN;
- const accesstoken = process.env.TOKEN;
+ console.log("0");
+//  const mytoken =process.env.MYTOKEN;
+//  const accesstoken = process.env.TOKEN;
  
 if(mode && token){
-    console.log(`${req.ip} mode and token done`)
-    if(mode=="subscribe" && token==mytoken){
-        console.log(`${req.ip} mytoken done`)
-        res.status(200).send("mode and token verified");
+    console.log("1")
+    if(mode == "subscribe" && token == myTocken){
+        console.log("2")
+        res.status(200).send(challenge);
     }
     else{
         res.status(403);
@@ -40,7 +42,7 @@ if(mode && token){
 app.post("/webhooks",(req,res)=>{
 
     let body_param = req.body;
-    console.log(JSON.stringify(body_param,null,2));
+    //console.log(JSON.stringify(body_param,null,2));
 
     if(body_param.object){
         console.log("inside body param");
@@ -91,4 +93,8 @@ app.get("/",(req,res)=>{
     
     res.status(200).send("This is webhook setting up");
     
+});
+
+app.listen(port,()=> {
+    console.log("webhook is listening on"+ port);
 });
