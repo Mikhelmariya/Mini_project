@@ -22,7 +22,9 @@ app.get("/webhook",(req,res)=>{
  const accesstoken = process.env.accesstoken;
  
 if(mode && token){
+    console.log(`${req.ip} mode and token done`)
     if(mode=="subscribe" && token==mytoken){
+        console.log(`${req.ip} mytoken done`)
         res.status(200).send(challenge);
     }
     else{
