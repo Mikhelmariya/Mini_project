@@ -35,6 +35,9 @@ if(mode && token){
         console.log(`${req.ip} mode and token done not done`)
     }
 }
+else{
+    console.log("else condition");
+}
 
 
 
