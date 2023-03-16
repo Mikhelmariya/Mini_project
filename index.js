@@ -84,7 +84,7 @@ app.post("/webhooks",(req,res)=>{
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
 
-    res.send('Here is something for you')
+   // res.send('Here is something for you')
     
     res.status(200).send("This is webhook setting up");
     
