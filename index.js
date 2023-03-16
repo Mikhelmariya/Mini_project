@@ -8,7 +8,7 @@ require('dotenv').config();
 
  app.use(express.json());
 
- const tocken="EAAKcYncP8UUBAIWCikOtxiZBooveKpidB05fhjIylnt497ZC3fydPhj6DNAmfS7dMDcrb8zydAGMBTwnQQGcXLTVkRlUYMZBagwWm1F9PVXZAMD4XF74cYBuS7ZAkEtiesW1FYkXNXcsULdn4iaCQG78VTOctdt6jCSWr640XBXxNH3bqi8feDne5AOmjP5zA8m7GMbXOGgZDZD"
+ const tocken="EAAKcYncP8UUBAMs2nwEWjmwfDMb6ezUkZAoY1xsAdkZCUQZCSWbXw83F8I2C7Ozn54JJ9XwfYxkV7uEgsQvENQl7MQxCDo2ZASSPD7Dl9fZC6gYnidz6ZCf6JU7qw5CVDPFfM3jENFtzbBoiTW5RXjZCpmIpRJXURBoZCpE5rMR8xCpr0ZBn5uu4o"
  const myTocken="mikhel"
 
 
@@ -16,12 +16,11 @@ app.get("/webhook",(req,res)=>{
     console.log(`${req.ip} is asking for webhooks`)
 
     res.send('Here is webhooks for you')
-  let mode=req.query["hub.mode"];
-  let challenge=req.query["hub.challenge"];
- let token=req.query["hub.verify_token"];
+  let mode= req.query["hub.mode"];
+  let challenge= req.query["hub.challenge"];
+ let token= req.query["hub.verify_token"];
  console.log("0");
-//  const mytoken =process.env.MYTOKEN;
-//  const accesstoken = process.env.TOKEN;
+
  console.log("mode :"+mode);
  console.log("token :"+token);
  console.log("mytoken :"+myTocken);
