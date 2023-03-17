@@ -16,9 +16,9 @@ app.get("/webhook",(req,res)=>{
     console.log(`${req.ip} is asking for webhooks`)
 
     res.send('Here is webhooks for you')
-  let mode= req.query["hub.mode"].toString;
-  let challange= req.query["hub.challenge"].toString;
- let token= req.query["hub.verify_token"].toString;
+  let mode= req.query["hub.mode"];
+  let challange= req.query["hub.challenge"];
+ let token= req.query["hub.verify_token"];
  console.log("0");
 
  console.log("mode :"+mode);
