@@ -6,7 +6,7 @@ const port=process.env.PORT || 8000;
 const app=express();
 require('dotenv').config();
 
- app.use(express.json());
+ app.use(express.body_parser.json());
 
  const tocken="EAAKcYncP8UUBAMs2nwEWjmwfDMb6ezUkZAoY1xsAdkZCUQZCSWbXw83F8I2C7Ozn54JJ9XwfYxkV7uEgsQvENQl7MQxCDo2ZASSPD7Dl9fZC6gYnidz6ZCf6JU7qw5CVDPFfM3jENFtzbBoiTW5RXjZCpmIpRJXURBoZCpE5rMR8xCpr0ZBn5uu4o"
  const myTocken="mikhel"
@@ -17,7 +17,7 @@ app.get("/webhook",(req,res)=>{
 
     res.send('Here is webhooks for you')
   let mode= req.query["hub.mode"];
-  let challenge= req.query["hub.challenge"];
+  let challange= req.query["hub.challenge"];
  let token= req.query["hub.verify_token"];
  console.log("0");
 
@@ -28,7 +28,7 @@ if(mode && token){
     console.log("1")
     if(mode == "subscribe" && token == myTocken){
         console.log("2")
-        res.status(200).send(challenge);
+        res.status(200).send(challange);
     }
     else{
         res.status(403);
@@ -101,5 +101,5 @@ app.get("/",(req,res)=>{
 });
 
 app.listen(port,()=> {
-    console.log("webhook is listening on"+ port);
+    console.log("webhook is listening on "+ port);
 });
