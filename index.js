@@ -8,17 +8,10 @@ require('dotenv').config();
 
  app.use(express.json());
 
- const tocken="EAAKcYncP8UUBABES0niWYdxujAvEDWZC7TfZAxYlF2lzyPZCuNCG6ZBtL4P2qqfDx69kx5jXNJA9cQEYQoA6ZC5gdPqzkHAH5n4HZBwjpdRldo6lHxNUpWMi4ZCKxrZCakg5IWzUG8c1mjmS38g8EqheFeNbefnhdQWXBMumx6AayJiVZCN46bLFG"
+ const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
  const myTocken="mikhel"
 
- app.get("/",(req,res)=>{
-    console.log(`${req.ip} is asking for /`)
 
-   // res.send('Here is something for you')
-    
-    res.status(200).send("This is webhook setting up");
-    
-});
 app.get("/webhook",(req,res)=>{
     console.log(`${req.ip} is asking for webhooks`)
 
@@ -98,7 +91,14 @@ app.post("/webhooks",(req,res)=>{
             }
     }
 });
+app.get("/",(req,res)=>{
+    console.log(`${req.ip} is asking for /`)
 
+   // res.send('Here is something for you')
+    
+    res.status(200).send("This is webhook setting up");
+    
+});
 
 app.listen(port,()=> {
     console.log("webhook is listening on "+ port);
