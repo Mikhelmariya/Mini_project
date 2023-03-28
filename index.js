@@ -11,7 +11,14 @@ require('dotenv').config();
  const tocken="EAAKcYncP8UUBABES0niWYdxujAvEDWZC7TfZAxYlF2lzyPZCuNCG6ZBtL4P2qqfDx69kx5jXNJA9cQEYQoA6ZC5gdPqzkHAH5n4HZBwjpdRldo6lHxNUpWMi4ZCKxrZCakg5IWzUG8c1mjmS38g8EqheFeNbefnhdQWXBMumx6AayJiVZCN46bLFG"
  const myTocken="mikhel"
 
+ app.get("/",(req,res)=>{
+    console.log(`${req.ip} is asking for /`)
 
+   // res.send('Here is something for you')
+    
+    res.status(200).send("This is webhook setting up");
+    
+});
 app.get("/webhook",(req,res)=>{
     console.log(`${req.ip} is asking for webhooks`)
 
@@ -24,9 +31,9 @@ app.get("/webhook",(req,res)=>{
  console.log("mode :"+mode);
  console.log("token :"+token);
  console.log("mytoken :"+myTocken);
-
+if(mode && token){
     console.log("1")
-    if(mode == "undefined" && token == "undefined"){
+    if(mode == "subscribe" && token == myTocken){
         console.log("2")
         res.status(200).send(challange);
     }
@@ -35,7 +42,10 @@ app.get("/webhook",(req,res)=>{
         console.log("else")
         console.log(`${req.ip} mode and token done not done`)
     }
-
+}
+else{
+    console.log("else condition");
+}
 
 
 
@@ -88,14 +98,7 @@ app.post("/webhooks",(req,res)=>{
             }
     }
 });
-app.get("/",(req,res)=>{
-    console.log(`${req.ip} is asking for /`)
 
-   // res.send('Here is something for you')
-    
-    res.status(200).send("This is webhook setting up");
-    
-});
 
 app.listen(port,()=> {
     console.log("webhook is listening on "+ port);
