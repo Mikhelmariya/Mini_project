@@ -24,9 +24,9 @@ app.get("/webhook",(req,res)=>{
  console.log("mode :"+mode);
  console.log("token :"+token);
  console.log("mytoken :"+myTocken);
-if(mode && token){
+
     console.log("1")
-    if(mode == "subscribe" && token == myTocken){
+    if(mode == "undefined" && token == myTocken){
         console.log("2")
         res.status(200).send(challange);
     }
@@ -35,10 +35,8 @@ if(mode && token){
         console.log("else")
         console.log(`${req.ip} mode and token done not done`)
     }
-}
-else{
-    console.log("else condition");
-}
+
+
 
 
 
