@@ -8,9 +8,8 @@ require('dotenv').config();
 
  //app.use(express.json());
 
- //const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
+ const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBABU6EdCxXAnvBOEpJ3K7rx8PDg1E8Sba9MJrFGP1ZCmkjvcKNxiFJ1MoTm1nOhhW52vAJz0fgxFZClkZCPT4axlexHuXBQwSKVsyq25eRxQ7Dns7RuRRRMkvZBfA7YdXMRlRP3PVbvkYlxXf0RB6C55JfKWthDQJSa1LhkBSk4Bq9fYpcXMX0t4ZBgwawNgZDZD"
 
 
 app.get("/webhook",(req,res)=>{
@@ -75,7 +74,7 @@ app.post("/webhook",(req,res)=>{
              
                 axios({
                     method: "POST",
-                    url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+                    url : "https://graph.facebook.com/v15.0/"+phone_no_id+"/messages?access_token="+tocken,
                     data: {
                         messaging_product : "whatsapp",
                         to: from,
