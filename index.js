@@ -64,10 +64,10 @@ app.post("/webhook",(req,res)=>{
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
                 let msg_body = body_param.entry[0].changes[0].values.messages[0].text.body;  
                 
-        console.log("Phone no id"+phone_no_id);
-        res.send(phone_no_id)
-        console.log("body param"+msg_body);
-        res.send(msg_body)
+        // console.log("Phone no id"+phone_no_id);
+        // res.send(phone_no_id)
+        // console.log("body param"+msg_body);
+        // res.send(msg_body)
 
    
                 
@@ -79,7 +79,7 @@ app.post("/webhook",(req,res)=>{
                         messaging_product : "whatsapp",
                         to: from,
                         text : {
-                            body:"Hi"
+                            body:"Hi Megna"
                         }
 
                     },
