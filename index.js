@@ -51,6 +51,10 @@ app.post("/webhook",(req,res)=>{
 
     if(body_param.object){
         console.log("inside body param");
+        console.log("entry"+body_param.entry);
+        console.log("messages"+body_param.entry[0].changes[0].value.messages);
+
+
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
              body_param.entry[0].changes[0].value.messages && 
@@ -65,7 +69,7 @@ app.post("/webhook",(req,res)=>{
         console.log("body param"+msg_body);
         res.send(msg_body)
 
-
+   
                 
              
                 axios({
