@@ -60,9 +60,9 @@ app.post("/webhook",(req,res)=>{
              body_param.entry[0].changes[0].value.messages && 
              body_param.entry[0].changes[0].value.messages[0]){
                
-                let phone_no_id = body_param.entry[0].changes[0].values.metadata.phone_number_id;
+                let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
-                let msg_body = body_param.entry[0].changes[0].values.messages[0].text.body;  
+                let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;  
                 
         // console.log("Phone no id"+phone_no_id);
         // res.send(phone_no_id)
