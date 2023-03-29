@@ -96,7 +96,7 @@ app.get("/",(req,res)=>{
 
    // res.send('Here is something for you')
     
-    //res.status(200).send("This is webhook setting up");
+    res.status(200).send("This is webhook setting up");
     
 });
 
