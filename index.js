@@ -47,7 +47,7 @@ else{
 app.post("/webhook",(req,res)=>{
 
     let body_param = req.body;
-    console.log(JSON.stringify(body_param,null,2));
+   // console.log(JSON.stringify(body_param,null,2));
 
     if(body_param.object){
         console.log("inside body param");
@@ -70,7 +70,7 @@ app.post("/webhook",(req,res)=>{
         // res.send(msg_body)
 
    
-                
+        console.log("inside body param");
              
                 axios({
                     method: "POST",
@@ -89,9 +89,12 @@ app.post("/webhook",(req,res)=>{
 
                 });
                 res.sendStatus(200);
+                console.log("axios  called");
+
             }else
             {
                 res.sendStatus(404);
+                console.log("axios not called");
             }
     }
 });
