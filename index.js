@@ -14,7 +14,7 @@ require('dotenv').config();
 
 app.get("/webhook",(req,res)=>{
     //console.log(`${req.ip} is asking for webhooks`)
-   console.log(JSON.stringify(body_param,null,2));
+   //console.log(JSON.stringify(body_param,null,2));
    // res.send('Here is webhooks for you')
   let mode= req.query["hub.mode"];
   let challange= req.query["hub.challenge"];
