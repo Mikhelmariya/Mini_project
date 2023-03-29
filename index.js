@@ -87,7 +87,18 @@ app.post("/webhook",(req,res)=>{
                         "Content-Type": "application/json"
                     }
 
-                });
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    res.sendStatus(200);
+                  })
+                  .catch((error) => {
+                    console.error(error.response.data);
+                    res.sendStatus(500);
+                  });
+              } else {
+                res.sendStatus(404);
+              }
                 res.sendStatus(200);
                 console.log("axios  called");
 
@@ -97,7 +108,7 @@ app.post("/webhook",(req,res)=>{
                 console.log("axios not called");
             }
     }
-});
+);
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
 
