@@ -47,11 +47,11 @@ else{
 app.post("/webhook",(req,res)=>{
 
     let body_param = req.body;
-    //console.log(JSON.stringify(body_param,null,2));
+    console.log(JSON.stringify(body_param,null,2));
 
     if(body_param.object){
         console.log("inside body param");
-        console.log("entry"+body_param.entry);
+        console.log("entry"+body_param.entry.JSON.stringify);
         console.log("messages"+body_param.entry[0].changes[0].value.messages);
 
 
