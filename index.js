@@ -3,10 +3,10 @@ const body_parser = require("body-parser");
 const axios = require("axios");
 
 const port=process.env.PORT || 8000;
-const app=express();
+const app=express().use(body_parser.json());
 require('dotenv').config();
 
- app.use(express.json());
+ //app.use(express.json());
 
  const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
  const myTocken="mikhel"
