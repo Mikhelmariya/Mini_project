@@ -94,6 +94,7 @@ app.post("/webhook",(req,res)=>{
                     //res.sendStatus(200);
                   })
                   .catch((error) => {
+                    console.log("error in axiox/post");
                     console.error(error.response.data);
                     res.sendStatus(500);
                   });
