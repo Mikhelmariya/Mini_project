@@ -8,11 +8,11 @@ const app=express().use(body_parser.json());
 require('dotenv').config();
 
 
-const { default: mongoose } = require("mongoose");
-const morgan = require("morgan");
+// const { default: mongoose } = require("mongoose");
+// const morgan = require("morgan");
 
-const user = require("../models/userModel");
-const userRouter = require("./Router/users");
+// const user = require("../models/userModel");
+// const userRouter = require("./Router/users");
 
  //app.use(express.json());
 
