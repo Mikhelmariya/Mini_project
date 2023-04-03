@@ -14,9 +14,6 @@ require('dotenv').config();
 
 
 app.get("/webhook",(req,res)=>{
-    //console.log(`${req.ip} is asking for webhooks`)
-   //console.log(JSON.stringify(body_param,null,2));
-   // res.send('Here is webhooks for you')
   let mode= req.query["hub.mode"];
   let challange= req.query["hub.challenge"];
  let token= req.query["hub.verify_token"];
@@ -52,11 +49,7 @@ app.post("/webhook",(req,res)=>{
 
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
-        // console.log("inside body param");
-        // console.log("entry"+body_param.entry);
-        // console.log("messages"+body_param.entry[0].changes[0].value.messages);
-
-
+        
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
              body_param.entry[0].changes[0].value.messages && 
@@ -66,7 +59,9 @@ app.post("/webhook",(req,res)=>{
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
                 console.log("3");
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
-                let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;  
+                let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+          
+       
                 
         // console.log("Phone no id"+phone_no_id);
         // res.send(phone_no_id)
@@ -76,8 +71,9 @@ app.post("/webhook",(req,res)=>{
    
         console.log("inside body param");
         console.log(
-            body_param.entry[0].changes[0].value.messages[0].type == "interactive"
+            body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
+          
              
                 // axios({
                 //     method: "POST",
