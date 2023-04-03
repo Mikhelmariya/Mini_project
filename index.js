@@ -1,10 +1,18 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
+app.use(morgan("dev"));
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 require('dotenv').config();
+
+
+const { default: mongoose } = require("mongoose");
+const morgan = require("morgan");
+
+const user = require("../models/userModel");
+const userRouter = require("./Router/users");
 
  //app.use(express.json());
 
