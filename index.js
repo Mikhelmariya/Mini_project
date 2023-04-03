@@ -85,7 +85,7 @@ app.post("/webhook",(req,res)=>{
              
                 axios({
                     method: "POST",
-                    url:"https://graph.facebook.com/v16.0/" + phone_number_id + "/messages",
+                    url:"https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
                     //url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
                     data: {
                         messaging_product : "whatsapp",
