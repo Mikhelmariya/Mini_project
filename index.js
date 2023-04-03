@@ -83,31 +83,33 @@ app.post("/webhook",(req,res)=>{
           );
           
              
-                // axios({
-                //     method: "POST",
-                //     url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-                //     data: {
-                //         messaging_product : "whatsapp",
-                //         to: from,
-                //         text : {
-                //             body:"Hi Megna"
-                //         }
+                axios({
+                    method: "POST",
+                    url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+                    data: {
+                        messaging_product : "whatsapp",
+                        to: from,
+                        text : {
+                            body:"Hi Megna"
+                        }
 
-                //     },
-                //     headers: {
-                //         "Content-Type": "application/json"
-                //     }
+                    },
+                    headers: {
+                         Authorization: "Bearer " + tocken,
 
-                // })
-                // .then((response) => {
-                //     console.log(response.data);
-                //     //res.sendStatus(200);
-                //   })
-                //   .catch((error) => {
-                //     console.log("error in axiox/post");
-                //     console.error(error.response.data);
-                //     //res.sendStatus(500);
-                //   });
+                        "Content-Type": "application/json"
+                    }
+
+                })
+                .then((response) => {
+                    console.log(response.data);
+                    //res.sendStatus(200);
+                  })
+                  .catch((error) => {
+                    console.log("error in axiox/post");
+                    console.error(error.response.data);
+                    //res.sendStatus(500);
+                  });
               } else {
                 res.sendStatus(404);
               }
