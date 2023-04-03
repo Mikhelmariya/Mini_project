@@ -51,17 +51,20 @@ app.post("/webhook",(req,res)=>{
    // console.log(JSON.stringify(body_param,null,2));
 
     if(body_param.object){
-        console.log("inside body param");
-        console.log("entry"+body_param.entry);
-        console.log("messages"+body_param.entry[0].changes[0].value.messages);
+        console.log(body_param.entry[0].changes[0].value.messages[0]);
+        // console.log("inside body param");
+        // console.log("entry"+body_param.entry);
+        // console.log("messages"+body_param.entry[0].changes[0].value.messages);
 
 
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
              body_param.entry[0].changes[0].value.messages && 
              body_param.entry[0].changes[0].value.messages[0]){
+                console.log("2");
                
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
+                console.log("3");
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
                 let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;  
                 
@@ -96,26 +99,23 @@ app.post("/webhook",(req,res)=>{
                   .catch((error) => {
                     console.log("error in axiox/post");
                     console.error(error.response.data);
-                    res.sendStatus(500);
+                    //res.sendStatus(500);
                   });
               } else {
                 res.sendStatus(404);
               }
-                //res.sendStatus(200);
-                console.log("axios  called");
+                
+               // console.log("axios  called");
 
             }else
             {
                 res.sendStatus(404);
-                console.log("axios not called");
+                //console.log("axios not called");
             }
     }
 );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
-
-   // res.send('Here is something for you')
-    
     res.status(200).send("This is webhook setting up");
     
 });
