@@ -15,7 +15,14 @@ function sendMessage(phone_no_id, tocken, data, res)
           Authorization: "Bearer " + tocken,
           "Content-Type": "application/json",
         },
-        data: data,
+        data: {
+                  messaging_product : "whatsapp",
+                  to: from,
+                  text : {
+                      body:"Hi Megna"
+                  }
+
+              },
       };
       axios(config).then(function (response) {
         console.log("axios sent!");
@@ -108,20 +115,7 @@ app.post("/webhook",(req,res)=>{
         
          if(msg_body =="Hii")  {
       
-            var data = JSON.stringify({
-                messaging_product: "whatsapp",
-                recipient_type: "individual",
-                to: from,
-                type: "text",
-                text: {
-                  type: "list",
-                  header: {
-                    type: "text",
-                    text: "Welcome to Dr Whats",
-                  },
-                  
-                },
-              });
+          
               sendMessage(phone_no_id, tocken, data, res);
            }  
                 // axios({
