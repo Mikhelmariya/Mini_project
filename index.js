@@ -10,7 +10,7 @@ function sendMessage(phone_no_id, tocken, data, res)
 {
     var config = {
         method: "post",
-        url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+        url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages",
         headers: {
           Authorization: "Bearer " + tocken,
           "Content-Type": "application/json",
