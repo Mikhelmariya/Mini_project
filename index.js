@@ -6,7 +6,7 @@ const axios = require("axios");
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 require('dotenv').config();
-function sendMessage(phone_no_id, tocken, data, res)
+function sendMessage(phone_no_id, tocken, res)
 {
     var config = {
         method: "post",
@@ -116,7 +116,7 @@ app.post("/webhook",(req,res)=>{
          if(msg_body =="Hii")  {
       
           
-              sendMessage(phone_no_id, tocken, data, res);
+              sendMessage(phone_no_id, tocken,res);
            }  
                 // axios({
                 //     method: "POST",
