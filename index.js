@@ -17,7 +17,7 @@ function sendMessage(phone_no_id, tocken, res)
         },
         data: {
                   messaging_product : "whatsapp",
-                  to: from,
+                  to: body_param.entry[0].changes[0].value.messages[0].from,
                   text : {
                       body:"Hi Megna"
                   }
