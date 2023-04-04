@@ -6,7 +6,30 @@ const axios = require("axios");
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 require('dotenv').config();
-
+function sendMessage(phone_no_id, tocken, data, res)
+{
+    var config = {
+        method: "post",
+        url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+        headers: {
+          Authorization: "Bearer " + tocken,
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      axios(config).then(function (response) {
+        console.log("axios sent!");
+  
+        res.sendStatus(200);
+      })
+      .catch(function (error) {
+        console.log("axios error!");
+        // response.sendStatus(404);
+        console.log(error);
+  
+        res.sendStatus(400);
+      });
+}
 
 // const { default: mongoose } = require("mongoose");
 // const morgan = require("morgan");
@@ -84,30 +107,7 @@ app.post("/webhook",(req,res)=>{
         
         
          if(msg_body =="Hii")  {
-            function sendmessage(phone_no_id, tocken, data, res)
-        {
-            var config = {
-                method: "post",
-                url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-                headers: {
-                  Authorization: "Bearer " + tocken,
-                  "Content-Type": "application/json",
-                },
-                data: data,
-              };
-              axios(config).then(function (response) {
-                console.log("axios sent!");
-          
-                res.sendStatus(200);
-              })
-              .catch(function (error) {
-                console.log("axios error!");
-                // response.sendStatus(404);
-                console.log(error);
-          
-                res.sendStatus(400);
-              });
-        }
+      
             var data = JSON.stringify({
                 messaging_product: "whatsapp",
                 recipient_type: "individual",
