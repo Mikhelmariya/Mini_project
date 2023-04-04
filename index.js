@@ -82,7 +82,9 @@ app.post("/webhook",(req,res)=>{
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
         
-        function sendmessage(phone_no_id, tocken, data, res)
+        
+         if(msg_body =="Hii")  {
+            function sendmessage(phone_no_id, tocken, data, res)
         {
             var config = {
                 method: "post",
@@ -106,7 +108,6 @@ app.post("/webhook",(req,res)=>{
                 res.sendStatus(400);
               });
         }
-         if(msg_body =="Hii")  {
             var data = JSON.stringify({
                 messaging_product: "whatsapp",
                 recipient_type: "individual",
