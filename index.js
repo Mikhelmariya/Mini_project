@@ -112,18 +112,12 @@ app.post("/webhook",(req,res)=>{
                 messaging_product: "whatsapp",
                 recipient_type: "individual",
                 to: from,
-                type: "interactive",
-                interactive: {
+                type: "text",
+                text: {
                   type: "list",
                   header: {
                     type: "text",
                     text: "Welcome to Dr Whats",
-                  },
-                  body: {
-                    text: "Happy to help you,Please Select the location where you wish to visit consult the doctor",
-                  },
-                  footer: {
-                    text: "Dr Whats",
                   },
                   
                 },
