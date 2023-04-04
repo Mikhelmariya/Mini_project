@@ -30,5 +30,23 @@ function sendMessage(phone_number_id, tocken, data, res) {
       res.sendStatus(400);
     });
     
-    
+    var data = JSON.stringify({
+      messaging_product: "whatsapp",
+      recipient_type: "individual",
+      to: from,
+      type: "interactive",
+      interactive: {
+        type: "list",
+        header: {
+          type: "text",
+          text: "Welcome to Dr Whats",
+        },
+        body: {
+          text: "Happy to help you,Please Select the location where you wish to visit consult the doctor",
+        },
+        
+      
+      },
+    });
+    sendMessage(phone_number_id, tocken, data, res);  
 }
