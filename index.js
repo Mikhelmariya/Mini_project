@@ -81,6 +81,9 @@ app.post("/webhook",(req,res)=>{
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
         
+          
+         if(msg_body =="Hii")  {
+      
           function sendMessage(phone_no_id, tocken, res)
           {
               var config = {
@@ -112,9 +115,6 @@ app.post("/webhook",(req,res)=>{
                   res.sendStatus(400);
                 });
           }
-          
-         if(msg_body =="Hii")  {
-      
           
               sendMessage(phone_no_id, tocken,res);
            }  
