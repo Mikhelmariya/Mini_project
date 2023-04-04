@@ -71,47 +71,94 @@ app.post("/webhook",(req,res)=>{
           
        
                 
-        // console.log("Phone no id"+phone_no_id);
-        // res.send(phone_no_id)
-        // console.log("body param"+msg_body);
-        // res.send(msg_body)
-
+        console.log("Phone no id"+phone_no_id);
+      
+        console.log("body param from user"+msg_body);
+        
+        console.log("from"+from);
    
         console.log("inside body param");
         console.log(
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
+        
+        function sendmessage(phone_no_id, tocken, data, res)
+        {
+            var config = {
+                method: "post",
+                url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+                headers: {
+                  Authorization: "Bearer " + tocken,
+                  "Content-Type": "application/json",
+                },
+                data: data,
+              };
+              axios(config).then(function (response) {
+                console.log("axios sent!");
           
-             
-                axios({
-                    method: "POST",
-                    url:"https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
-                    //url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-                    data: {
-                        messaging_product : "whatsapp",
-                        to: from,
-                        text : {
-                            body:"Hi Megna"
-                        }
+                res.sendStatus(200);
+              })
+              .catch(function (error) {
+                console.log("axios error!");
+                // response.sendStatus(404);
+                console.log(error);
+          
+                res.sendStatus(400);
+              });
+        }
+         if(msg_body =="Hii")  {
+            var data = JSON.stringify({
+                messaging_product: "whatsapp",
+                recipient_type: "individual",
+                to: from,
+                type: "interactive",
+                interactive: {
+                  type: "list",
+                  header: {
+                    type: "text",
+                    text: "Welcome to Dr Whats",
+                  },
+                  body: {
+                    text: "Happy to help you,Please Select the location where you wish to visit consult the doctor",
+                  },
+                  footer: {
+                    text: "Dr Whats",
+                  },
+                  
+                },
+              });
+              sendMessage(phone_no_id, tocken, data, res);
+           }  
+                // axios({
+                //     method: "POST",
+                //     //url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+                //     data: {
+                //         messaging_product : "whatsapp",
+                //         to: from,
+                //         text : {
+                //             body:"Hi Megna"
+                //         }
 
-                    },
-                    headers: {
-                         Authorization: "Bearer " + tocken,
+                //     },
+                //     headers: {
+                //          Authorization: "Bearer " + tocken,
 
-                        "Content-Type": "application/json"
-                    }
+                //         "Content-Type": "application/json"
+                //     }
 
-                })
-                .then((response) => {
-                    console.log(response.data);
-                    //res.sendStatus(200);
-                  })
-                  .catch((error) => {
-                    console.log("error in axiox/post");
-                    console.error(error.response.data);
-                    //res.sendStatus(500);
-                  });
-              } else {
+                // })
+                // .then((response) => {
+                //     console.log(response.data);
+                //     //res.sendStatus(200);
+                //   })
+                //   .catch((error) => {
+                //     console.log("error in axiox/post");
+                //     console.error(error.response.data);
+                //     //res.sendStatus(500);
+                //   });
+              } 
+              
+              else {
                 res.sendStatus(404);
               }
                 
