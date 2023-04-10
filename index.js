@@ -93,7 +93,7 @@ app.post("/webhook",(req,res)=>{
             maxBodyLength: Infinity,
             url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
             headers: { 
-              'Authorization': 'Bearer EAAKl03DggZBYBAB1phtkyCXKZAZCgD1LUHXTd8xM8sDaHN8y4nEF8n1Pp8ZCZB7SKos3lWFixe0GbnsmAPh6mhYy2f1VjPXZAXqKIB7pJHKQMawrgpdfDZAZC6TXUSBH7WGyVp3eWZAmonAlUbVq2kVyCYa7Op0CuEYoUGgU12MIQ74ZBeUIA3nx69tPU4NZCYStSC1BCYuqvoZBFQZDZD', 
+              'Authorization': 'Bearer '+tocken, 
               'Content-Type': 'application/json'
             },
             data : data
