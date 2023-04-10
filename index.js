@@ -7,13 +7,7 @@ const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 require('dotenv').config();
 
-// const { default: mongoose } = require("mongoose");
-// const morgan = require("morgan");
 
-// const user = require("../models/userModel");
-// const userRouter = require("./Router/users");
-
- //app.use(express.json());
 
  //const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
  const myTocken="mikhel"
@@ -81,44 +75,59 @@ app.post("/webhook",(req,res)=>{
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
         
-          
-         if(msg_body =="Hii")  {
+         axios({
+            method:"POST",
+            url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+            data:{
+                messaging_product:"whatsapp",
+                to:from,
+                text:{
+                    body:"Hii this is chat TKM"
+                }
+            },
+            headers:{
+                "Content-Type": "application/json"
+            }
+
+         }) ;
+         res.sendStatus(200);
+        //  if(msg_body =="Hii")  {
       
-          function sendMessage(phone_no_id, tocken, res)
-          {
-              var config = {
-                  method: "post",
-                  url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages",
-                  headers: {
-                    Authorization: "Bearer " + tocken,
-                    "Content-Type": "application/json",
-                  },
-                  data: {
-                            messaging_product : "whatsapp",
-                            to: body_param.entry[0].changes[0].value.messages[0].from,
-                            text : {
-                                body:"Hi Megna"
-                            }
+        //   function sendMessage(phone_no_id, tocken, res)
+        //   {
+        //       var config = {
+        //           method: "post",
+        //           url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages",
+        //           headers: {
+        //             Authorization: "Bearer " + tocken,
+        //             "Content-Type": "application/json",
+        //           },
+        //           data: {
+        //                     messaging_product : "whatsapp",
+        //                     to: body_param.entry[0].changes[0].value.messages[0].from,
+        //                     text : {
+        //                         body:"Hi Megna"
+        //                     }
           
-                        },
-                };
-                axios(config).then(function (response) {
-                  console.log("axios sent!");
+        //                 },
+        //         };
+        //         axios(config).then(function (response) {
+        //           console.log("axios sent!");
             
-                  res.sendStatus(200);
-                })
-                .catch(function (error) {
-                  console.log("axios error!");
-                  // response.sendStatus(404);
-                  console.log(error);
+        //           res.sendStatus(200);
+        //         })
+        //         .catch(function (error) {
+        //           console.log("axios error!");
+        //           // response.sendStatus(404);
+        //           console.log(error);
             
-                  res.sendStatus(400);
-                });
-          }
+        //           res.sendStatus(400);
+        //         });
+        //   }
           
-              sendMessage(phone_no_id, tocken,res);
-           }  
-                // axios({
+        //       sendMessage(phone_no_id, tocken,res);
+        //    }  
+        //         // axios({
                 //     method: "POST",
                 //     //url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
                 //     data: {
