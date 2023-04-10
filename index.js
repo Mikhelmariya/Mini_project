@@ -105,6 +105,7 @@ app.post("/webhook",(req,res)=>{
           })
           .catch((error) => {
             console.log(error);
+            console.log("data"+data);
           });
         //   let data = JSON.stringify({
         //     "messaging_product": "whatsapp",
@@ -221,17 +222,17 @@ app.post("/webhook",(req,res)=>{
                 //   });
               } 
               
-              else {
-                res.sendStatus(404);
-              }
+              // else {
+              //   res.sendStatus(404);
+              // }
                 
                // console.log("axios  called");
-
-            }else
-            {
-                res.sendStatus(404);
-                //console.log("axios not called");
-            }
+              }
+            // else
+            // {
+            //     res.sendStatus(404);
+            //     //console.log("axios not called");
+            // }
     }
 );
 app.get("/",(req,res)=>{
