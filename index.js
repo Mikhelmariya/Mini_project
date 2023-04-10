@@ -74,23 +74,57 @@ app.post("/webhook",(req,res)=>{
         console.log(
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
-        
-         axios({
-            method:"POST",
-            url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-            data:{
-                messaging_product:"whatsapp",
-                to:from,
-                text:{
-                    body:"Hii this is chat TKM"
-                }
-            },
-            headers:{
-                "Content-Type": "application/json"
-            }
 
-         }) ;
-         res.sendStatus(200);
+          let data = JSON.stringify({
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "918714013839",
+            // "context": {
+            //   "message_id": "<MSGID_OF_PREV_MSG>"
+            // },
+            "type": "text",
+            "text": {
+              "preview_url": false,
+              "body": "<TEXT_MSG_CONTENT>"
+            }
+          });
+
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+            headers: { 
+              'Authorization': 'Bearer '+tocken, 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          
+        
+        //  axios({
+        //     method:"POST",
+        //     url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
+        //     data:{
+        //         messaging_product:"whatsapp",
+        //         to:from,
+        //         text:{
+        //             body:"Hii this is chat TKM"
+        //         }
+        //     },
+        //     headers:{
+        //         "Content-Type": "application/json"
+        //     }
+
+        //  }) ;
+        //  res.sendStatus(200);
         //  if(msg_body =="Hii")  {
       
         //   function sendMessage(phone_no_id, tocken, res)
