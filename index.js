@@ -68,7 +68,7 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
 
-        function sendMessage(phone_number_id, tocken, data, res) {
+        function sendMessage(phone_no_id, tocken, data, res) {
           var config = {
             method: "post",
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
