@@ -77,27 +77,23 @@ app.post("/webhook",(req,res)=>{
         console.log(
             body_param.entry[0].changes[0].value.messages[0].type == "text"
           );
-
           let data = JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
             "to": "918714013839",
-            "context": {
-              "message_id": id
-            },
             "type": "text",
             "text": {
               "preview_url": false,
-              "body": "<TEXT_MSG_CONTENT>"
+              "body": "text-message-content"
             }
           });
-
+          
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
             url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
             headers: { 
-              'Authorization': 'Bearer '+tocken, 
+              'Authorization': 'Bearer EAAKl03DggZBYBAB1phtkyCXKZAZCgD1LUHXTd8xM8sDaHN8y4nEF8n1Pp8ZCZB7SKos3lWFixe0GbnsmAPh6mhYy2f1VjPXZAXqKIB7pJHKQMawrgpdfDZAZC6TXUSBH7WGyVp3eWZAmonAlUbVq2kVyCYa7Op0CuEYoUGgU12MIQ74ZBeUIA3nx69tPU4NZCYStSC1BCYuqvoZBFQZDZD', 
               'Content-Type': 'application/json'
             },
             data : data
@@ -110,6 +106,38 @@ app.post("/webhook",(req,res)=>{
           .catch((error) => {
             console.log(error);
           });
+        //   let data = JSON.stringify({
+        //     "messaging_product": "whatsapp",
+        //     "recipient_type": "individual",
+        //     "to": "918714013839",
+        //     "context": {
+        //       "message_id": id
+        //     },
+        //     "type": "text",
+        //     "text": {
+        //       "preview_url": false,
+        //       "body": "<TEXT_MSG_CONTENT>"
+        //     }
+        //   });
+
+        //   let config = {
+        //     method: 'post',
+        //     maxBodyLength: Infinity,
+        //     url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+        //     headers: { 
+        //       'Authorization': 'Bearer '+tocken, 
+        //       'Content-Type': 'application/json'
+        //     },
+        //     data : data
+        //   };
+          
+        //   axios.request(config)
+        //   .then((response) => {
+        //     console.log(JSON.stringify(response.data));
+        //   })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   });
           
         
         //  axios({
