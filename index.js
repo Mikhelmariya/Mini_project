@@ -1,7 +1,7 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
-//app.use(morgan("dev"));
+
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -15,14 +15,11 @@ require('dotenv').config();
 
 
 app.get("/webhook",(req,res)=>{
-  let mode= req.query["hub.mode"];
-  let challange= req.query["hub.challenge"];
- let token= req.query["hub.verify_token"];
- console.log("0");
+let mode= req.query["hub.mode"];
+let challange= req.query["hub.challenge"];
+let token= req.query["hub.verify_token"];
 
- console.log("mode :"+mode);
- console.log("token :"+token);
- console.log("mytoken :"+myTocken);
+
 if(mode && token){
     console.log("1")
     if(mode == "subscribe" && token == myTocken){
@@ -46,7 +43,6 @@ else{
 app.post("/webhook",(req,res)=>{
 
     let body_param = req.body;
-   // console.log(JSON.stringify(body_param,null,2));
 
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
@@ -66,174 +62,17 @@ app.post("/webhook",(req,res)=>{
           
        
                 
-        console.log("Phone no id"+phone_no_id);
-      
-        console.log("body param from user"+msg_body);
-        
-        console.log("from"+from);
-        console.log("id"+id);
-   
-        console.log("inside body param");
-        console.log(
-            body_param.entry[0].changes[0].value.messages[0].type == "text"
-          );
-          let data = JSON.stringify({
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": "918714013839",
-            "type": "text",
-            "text": {
-              "preview_url": false,
-              "body": "text-message-content"
-            }
-          });
+        console.log("Phone no id :"+phone_no_id);
+        console.log("Message from user : "+msg_body);
+        console.log("user contact : "+from);
+        console.log("id "+id);
+        console.log(body_param.entry[0].changes[0].value.messages[0].type == "interactive");
           
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-            headers: { 
-              'Authorization': 'Bearer '+tocken, 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-            console.log("data"+data);
-          });
-        //   let data = JSON.stringify({
-        //     "messaging_product": "whatsapp",
-        //     "recipient_type": "individual",
-        //     "to": "918714013839",
-        //     "context": {
-        //       "message_id": id
-        //     },
-        //     "type": "text",
-        //     "text": {
-        //       "preview_url": false,
-        //       "body": "<TEXT_MSG_CONTENT>"
-        //     }
-        //   });
-
-        //   let config = {
-        //     method: 'post',
-        //     maxBodyLength: Infinity,
-        //     url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-        //     headers: { 
-        //       'Authorization': 'Bearer '+tocken, 
-        //       'Content-Type': 'application/json'
-        //     },
-        //     data : data
-        //   };
-          
-        //   axios.request(config)
-        //   .then((response) => {
-        //     console.log(JSON.stringify(response.data));
-        //   })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   });
-          
-        
-        //  axios({
-        //     method:"POST",
-        //     url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-        //     data:{
-        //         messaging_product:"whatsapp",
-        //         to:from,
-        //         text:{
-        //             body:"Hii this is chat TKM"
-        //         }
-        //     },
-        //     headers:{
-        //         "Content-Type": "application/json"
-        //     }
-
-        //  }) ;
-        //  res.sendStatus(200);
-        //  if(msg_body =="Hii")  {
-      
-        //   function sendMessage(phone_no_id, tocken, res)
-        //   {
-        //       var config = {
-        //           method: "post",
-        //           url: "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages",
-        //           headers: {
-        //             Authorization: "Bearer " + tocken,
-        //             "Content-Type": "application/json",
-        //           },
-        //           data: {
-        //                     messaging_product : "whatsapp",
-        //                     to: body_param.entry[0].changes[0].value.messages[0].from,
-        //                     text : {
-        //                         body:"Hi Megna"
-        //                     }
-          
-        //                 },
-        //         };
-        //         axios(config).then(function (response) {
-        //           console.log("axios sent!");
-            
-        //           res.sendStatus(200);
-        //         })
-        //         .catch(function (error) {
-        //           console.log("axios error!");
-        //           // response.sendStatus(404);
-        //           console.log(error);
-            
-        //           res.sendStatus(400);
-        //         });
-        //   }
-          
-        //       sendMessage(phone_no_id, tocken,res);
-        //    }  
-        //         // axios({
-                //     method: "POST",
-                //     //url : "https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-                //     data: {
-                //         messaging_product : "whatsapp",
-                //         to: from,
-                //         text : {
-                //             body:"Hi Megna"
-                //         }
-
-                //     },
-                //     headers: {
-                //          Authorization: "Bearer " + tocken,
-
-                //         "Content-Type": "application/json"
-                //     }
-
-                // })
-                // .then((response) => {
-                //     console.log(response.data);
-                //     //res.sendStatus(200);
-                //   })
-                //   .catch((error) => {
-                //     console.log("error in axiox/post");
-                //     console.error(error.response.data);
-                //     //res.sendStatus(500);
-                //   });
-              } 
+         } 
               
-              // else {
-              //   res.sendStatus(404);
-              // }
-                
-               // console.log("axios  called");
-              }
-            // else
-            // {
-            //     res.sendStatus(404);
-            //     //console.log("axios not called");
-            // }
-    }
+      }
+            
+   }
 );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
