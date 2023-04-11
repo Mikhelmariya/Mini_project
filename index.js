@@ -71,12 +71,12 @@ app.post("/webhook",(req,res)=>{
        
         axios({
           method:"POST",
-          url:"https://graph.facebook.com/v13.0/"+phone_no_id+"/messages?access_token="+tocken,
+          url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
           data:{
               messaging_product:"whatsapp",
               to:from,
               text:{
-                  body:"Hi.. I'm Prasath, your message is "+msg_body
+                  body:"Hi..your mssg is "+msg_body
               }
           },
           headers:{
