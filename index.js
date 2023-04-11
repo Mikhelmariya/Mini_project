@@ -80,7 +80,7 @@ app.post("/webhook",(req,res)=>{
             data: data,
           };
         }
-        modules.export ={
+      module.export ={
         name: function (phone_no_id, tocken, from, res) {
           var data = JSON.stringify({
             messaging_product: "whatsapp",
