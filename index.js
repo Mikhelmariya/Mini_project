@@ -67,7 +67,9 @@ app.post("/webhook",(req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
+        
         function sendMessage(phone_no_id, tocken, data, res) {
+          console.log("called send message function");
           var config = {
             method: "post",
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
@@ -78,22 +80,23 @@ app.post("/webhook",(req,res)=>{
             data: data,
           };
         }
-        
-       if(msg_body=="Hii")
-       {
-        var data = JSON.stringify({
-          messaging_product: "whatsapp",
-          to: from,
-          recipient_type: "individual",
-          type: "text",
-          text: {
-            // type: "list",
-            preview_url: false,
-            body: "Please enter your name",
-          },
-        });
-        sendMessage(phone_no_id, tocken, data, res);
-       }
+        modules.export ={
+        name: function (phone_no_id, tocken, from, res) {
+          var data = JSON.stringify({
+            messaging_product: "whatsapp",
+            to: from,
+            recipient_type: "individual",
+            type: "text",
+            text: {
+              // type: "list",
+              preview_url: false,
+              body: "Please enter your name",
+            },
+          });
+          sendMessage(phone_no_id, tocken, data, res);
+        }
+      } 
+    
              }
       }
             
