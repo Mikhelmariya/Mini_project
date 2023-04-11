@@ -80,7 +80,7 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
-         config
+         config();
           
         }
       module.exports ={
