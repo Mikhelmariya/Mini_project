@@ -72,6 +72,7 @@ app.post("/webhook",(req,res)=>{
           console.log("called send message function");
           var config = {
             method: "post",
+            maxBodyLength: Infinity,
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
             headers: {
               Authorization: "Bearer " + tocken,
@@ -79,7 +80,7 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
-          axios(config)
+          axios.request(config)
           .then(function (response) {
             console.log("axios sent!");
       
@@ -90,7 +91,7 @@ app.post("/webhook",(req,res)=>{
             // response.sendStatus(404);
             console.log(error);
       
-            res.sendStatus(400);
+           
           });
         }
       module.exports ={
