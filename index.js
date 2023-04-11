@@ -67,30 +67,34 @@ app.post("/webhook",(req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
-
-       
-        axios({
-          method:"POST",
-          url:"https://graph.facebook.com/v16.0/"+phone_no_id+"/messages?access_token="+tocken,
-          data:{
-              messaging_product:"whatsapp",
-              to:from,
-              text:{
-                  body:"Hi..your mssg is "+msg_body
-              }
+        function sendMessage(phone_no_id, tocken, data, res) {
+          var config = {
+            method: "post",
+            url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
+            headers: {
+              Authorization: "Bearer " + tocken,
+              "Content-Type": "application/json",
+            },
+            data: data,
+          };
+        }
+        
+       if(msg_body=="Hii")
+       {
+        var data = JSON.stringify({
+          messaging_product: "whatsapp",
+          to: from,
+          recipient_type: "individual",
+          type: "text",
+          text: {
+            // type: "list",
+            preview_url: false,
+            body: "Please enter your name",
           },
-          headers:{
-              "Content-Type":"application/json"
-          }
-
-      });
-
-      res.sendStatus(200);
-   }else{
-       res.sendStatus(404);
-          
-         } 
-              
+        });
+        sendMessage(phone_no_id, tocken, data, res);
+       }
+             }
       }
             
    }
