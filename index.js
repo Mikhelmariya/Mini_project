@@ -69,6 +69,7 @@ app.post("/webhook",(req,res)=>{
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
         
+      if(msg_body=='Hii'){
         function sendMessage(phone_no_id, tocken, data, res) {
           console.log("called send message function");
           var config = {
@@ -98,6 +99,7 @@ app.post("/webhook",(req,res)=>{
         }
       } 
     
+      }
              }
       }
             
