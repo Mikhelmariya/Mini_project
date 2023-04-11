@@ -70,7 +70,7 @@ app.post("/webhook",(req,res)=>{
         
       function sendMessage(phone_no_id, tocken, data, res) {
           console.log("called send message function");
-          var config = {
+           config = {
             method: "post",
             maxBodyLength: Infinity,
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
@@ -80,7 +80,7 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
-         config();
+         
           
         }
       module.exports ={
