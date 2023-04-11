@@ -79,9 +79,11 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
+          axios(config);
         }
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
+          console.log("Name function called");
           var data = JSON.stringify({
             messaging_product: "whatsapp",
             to: from,
