@@ -79,7 +79,19 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
-          axios(config);
+          axios(config)
+          .then(function (response) {
+            console.log("axios sent!");
+      
+            res.sendStatus(200);
+          })
+          .catch(function (error) {
+            console.log("axios error!");
+            // response.sendStatus(404);
+            console.log(error);
+      
+            res.sendStatus(400);
+          });
         }
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
