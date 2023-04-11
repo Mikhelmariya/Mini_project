@@ -68,9 +68,7 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
-        
-      if(msg_body=='Hii'){
-        function sendMessage(phone_no_id, tocken, data, res) {
+      function sendMessage(phone_no_id, tocken, data, res) {
           console.log("called send message function");
           var config = {
             method: "post",
@@ -81,8 +79,21 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
+          axios(config)
+    .then(function (response) {
+      console.log("axios sent!");
+
+      res.sendStatus(200);
+    })
+    .catch(function (error) {
+      console.log("axios error!");
+      // response.sendStatus(404);
+      console.log(error);
+
+      res.sendStatus(400);
+    });
         }
-      module.export ={
+      module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           var data = JSON.stringify({
             messaging_product: "whatsapp",
@@ -96,14 +107,17 @@ app.post("/webhook",(req,res)=>{
             },
           });
           sendMessage(phone_no_id, tocken, data, res);
-        }
+        },
       } 
-    
+    if(msg_body=="Hii"){
+      console.log("inside if msg_body");
+      module.exports.name(phone_no_id, tocken, from, res);
+    }
       }
              }
       }
             
-   }
+   
 );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
