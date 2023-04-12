@@ -119,7 +119,28 @@ app.post("/webhook",(req,res)=>{
               }
             }
           });
-          sendMessage(phone_no_id, tocken, data, res);
+          
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://graph.facebook.com/v16.0/106016945487115/messages',
+          
+          headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': 'Bearer EAAIZAYYHsUXIBAHmiwjfTcqTqY6bs2Q9gZBO4vZCPFWMN3vmwT4FqdRJKBQIg6yXKc0fQAVB9H3wfTQaEvyx3SAnGbiY4OSi7D8CRO3RrCM3vUMzgHhm0zQeZAf3FUWYK2pnNbEwwC8Tykw9pAKtCzTF3RbGZC1goR1elqtNXqysQ2HsSzIHSBSXxCmThZCTXoB0gxN5ZBj5cZBe1x61U8sp'
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          
+          // sendMessage(phone_no_id, tocken, data, res);
         },
       } 
     if(msg_body=="Hii"){
