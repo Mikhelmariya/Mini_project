@@ -108,16 +108,16 @@ app.post("/webhook",(req,res)=>{
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
-          var data = JSON.stringify({
-            messaging_product: "whatsapp",
-            to: from,
-            recipient_type: "individual",
-            type: "text",
-            text: {
-              // type: "list",
-              preview_url: false,
-              body: "Comming Soon",
-            },
+          let data = JSON.stringify({
+            "messaging_product": "whatsapp",
+            "to": "919207390779",
+            "type": "template",
+            "template": {
+              "name": "hello_world",
+              "language": {
+                "code": "en_US"
+              }
+            }
           });
           sendMessage(phone_no_id, tocken, data, res);
         },
