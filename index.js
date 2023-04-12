@@ -75,12 +75,12 @@ app.post("/webhook",(req,res)=>{
             maxBodyLength: Infinity,
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
             headers: {
-              Authorization: "Bearer " + tocken,
+              Authorization: "Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD",
               "Content-Type": "application/json",
             },
             data: data,
           };
-         
+         axios(config);
           
         }
       module.exports ={
