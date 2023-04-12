@@ -1,7 +1,7 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
-
+//old tok =EAAKl03DggZBYBAI6kMrIzCqh7HDeNEdj22waZA7dweyPItOeLcnN43Kw1CyTyZAk9zZBLdnT3sZALBqiugPEnTBc6WPZBl6JqwCQ2t9R30DBBzKsxitZCiLfgnumvkHNYy6kmD2iBdM7JzatN3zVt2XHEQ921kcXDZBOheZC9lZBVfyYug5QhAod3A
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -70,17 +70,27 @@ app.post("/webhook",(req,res)=>{
         
       function sendMessage(phone_no_id, tocken, data, res) {
           console.log("called send message function");
-           var config = {
-            method: "post",
+          //  var config = {
+          //   method: "post",
+          //   maxBodyLength: Infinity,
+          //   url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
+          //   headers: {
+          //     'Authorization': "Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD",
+          //     'Content-Type': "application/json",
+          //   },
+          //   data: data,
+          // };
+          let config = {
+            method: 'post',
             maxBodyLength: Infinity,
-            url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
-            headers: {
-              "Authorization": "Bearer EAAKl03DggZBYBAI6kMrIzCqh7HDeNEdj22waZA7dweyPItOeLcnN43Kw1CyTyZAk9zZBLdnT3sZALBqiugPEnTBc6WPZBl6JqwCQ2t9R30DBBzKsxitZCiLfgnumvkHNYy6kmD2iBdM7JzatN3zVt2XHEQ921kcXDZBOheZC9lZBVfyYug5QhAod3A",
-              "Content-Type": "application/json",
+            url: 'https://graph.facebook.com/v16.0/'+phone_no_id+'/messages',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': 'Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD'
             },
-            data: data,
+            data : data
           };
-          axios(config)
+          axios.request(config)
           .then(function (response) {
             console.log("axios sent!");
       
