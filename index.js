@@ -70,7 +70,7 @@ app.post("/webhook",(req,res)=>{
         
       function sendMessage(phone_no_id, tocken, data, res) {
           console.log("called send message function");
-           config = {
+           var config = {
             method: "post",
             maxBodyLength: Infinity,
             url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
@@ -80,7 +80,19 @@ app.post("/webhook",(req,res)=>{
             },
             data: data,
           };
-         axios(config);
+          axios(config)
+          .then(function (response) {
+            console.log("axios sent!");
+      
+            res.sendStatus(200);
+          })
+          .catch(function (error) {
+            console.log("axios error!");
+            // response.sendStatus(404);
+            console.log(error);
+      
+            res.sendStatus(400);
+          });
           
         }
       module.exports ={
