@@ -106,7 +106,6 @@ app.post("/webhook",(req,res)=>{
               }
             }
           });
-          print(data);
           
           
           sendMessage(phone_no_id, tocken, data, res);
