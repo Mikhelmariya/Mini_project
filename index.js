@@ -11,9 +11,9 @@ require('dotenv').config();
 
  //const tocken="EAAKl03DggZBYBAHQvnZBpcgZAXXewepGeC6jKd9BFiYWR1AXRHbmMafRLWzHelafdLUASGjAcLMg3cF10rCdBq6DW6padhclaCtUIeah8XQBZBNkMDZCm88vZAd6TKEHqaZBbTUMNEbjhO9vm4GsoPTZAJRyZBK9pM66PZCx7Xt6j8g1yJpe1IMRxz"
  const myTocken="mikhel"
- const tocken ="EAAKl03DggZBYBAI6kMrIzCqh7HDeNEdj22waZA7dweyPItOeLcnN43Kw1CyTyZAk9zZBLdnT3sZALBqiugPEnTBc6WPZBl6JqwCQ2t9R30DBBzKsxitZCiLfgnumvkHNYy6kmD2iBdM7JzatN3zVt2XHEQ921kcXDZBOheZC9lZBVfyYug5QhAod3A"
+//latest  const tocken ="EAAKl03DggZBYBAI6kMrIzCqh7HDeNEdj22waZA7dweyPItOeLcnN43Kw1CyTyZAk9zZBLdnT3sZALBqiugPEnTBc6WPZBl6JqwCQ2t9R30DBBzKsxitZCiLfgnumvkHNYy6kmD2iBdM7JzatN3zVt2XHEQ921kcXDZBOheZC9lZBVfyYug5QhAod3A"
 
-
+const tocken="EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -68,43 +68,43 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
-      function sendMessage(phone_no_id, tocken, data, res) {
-          console.log("called send message function");
-          //  var config = {
-          //   method: "post",
-          //   maxBodyLength: Infinity,
-          //   url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
-          //   headers: {
-          //     'Content-Type': "application/json",
-          //   },
-          //   data: data,
-          // };
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-            headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': "Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD",
+      // function sendMessage(phone_no_id, tocken, data, res) {
+      //     console.log("called send message function");
+      //     //  var config = {
+      //     //   method: "post",
+      //     //   maxBodyLength: Infinity,
+      //     //   url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
+      //     //   headers: {
+      //     //     'Content-Type': "application/json",
+      //     //   },
+      //     //   data: data,
+      //     // };
+      //     let config = {
+      //       method: 'post',
+      //       maxBodyLength: Infinity,
+      //       url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+      //       headers: { 
+      //         'Content-Type': 'application/json', 
+      //         'Authorization': "Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD",
 
-            },
-            data : data
-          };
-          axios.request(config)
-          .then(function (response) {
-            console.log("axios sent!");
+      //       },
+      //       data : data
+      //     };
+      //     axios(config)
+      //     .then(function (response) {
+      //       console.log("axios sent!");
       
-            res.sendStatus(200);
-          })
-          .catch(function (error) {
-            console.log("axios error!");
-            // response.sendStatus(404);
-            console.log(error);
+      //       res.sendStatus(200);
+      //     })
+      //     .catch(function (error) {
+      //       console.log("axios error!");
+      //       // response.sendStatus(404);
+      //       console.log(error);
       
-            res.sendStatus(400);
-          });
+      //       res.sendStatus(400);
+      //     });
           
-        }
+      //   }
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
@@ -127,7 +127,7 @@ app.post("/webhook",(req,res)=>{
           
           headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKl03DggZBYBAF1hoLUZCJDNWHrSXzDvjVj2g45xgrJCr9zJeOW6jnLNkAStfCaybtCrZC2Q98SFOu4IyPb384CxRUVkZBqKVCt77LNnP20PoUiy3is4FXRCXAILjEMYmZARc0NySqxfmrkDdBSL9PenlD6VjZCN0jUibVqfCQONI68Nv5WKP'
+              'Authorization': 'Bearer EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD'
             },
             data : data
           };
