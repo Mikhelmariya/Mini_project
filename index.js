@@ -68,43 +68,28 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
-      // function sendMessage(phone_no_id, tocken, data, res) {
-      //     console.log("called send message function");
-      //     //  var config = {
-      //     //   method: "post",
-      //     //   maxBodyLength: Infinity,
-      //     //   url: "https://graph.facebook.com/v16.0/" + phone_no_id + "/messages",
-      //     //   headers: {
-      //     //     'Content-Type': "application/json",
-      //     //   },
-      //     //   data: data,
-      //     // };
-      //     let config = {
-      //       method: 'post',
-      //       maxBodyLength: Infinity,
-      //       url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-      //       headers: { 
-      //         'Content-Type': 'application/json', 
-      //         'Authorization': "Bearer EAAKl03DggZBYBALg6Ogap5d2TOASjTFeL4yfDgwNDLsBUIM9d4w5PKnJObY462RIPAappf7tc6YOZCxt2pkfHlKo7MtcSh7pmU3UkCgt2RgOsqqthMO7UBD3UZA4yjxyRc2c0g3lwNF90lYvU23liOlvZCBDphSCa6jVwhvk7bTU9gBdjXorUgYkrQsrl7T3K5KHWpZCy1wZDZD",
-
-      //       },
-      //       data : data
-      //     };
-      //     axios(config)
-      //     .then(function (response) {
-      //       console.log("axios sent!");
-      
-      //       res.sendStatus(200);
-      //     })
-      //     .catch(function (error) {
-      //       console.log("axios error!");
-      //       // response.sendStatus(404);
-      //       console.log(error);
-      
-      //       res.sendStatus(400);
-      //     });
+      function sendMessage(phone_no_id, tocken, data, res) {
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+        
+        headers: { 
+            'Content-Type': 'application/json', 
+            'Authorization': 'Bearer EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD'
+          },
+          data : data
+        };
+        
+        axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
           
-      //   }
+        }
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
@@ -119,28 +104,10 @@ app.post("/webhook",(req,res)=>{
               }
             }
           });
+          print(data);
           
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
           
-          headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD'
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-          // sendMessage(phone_no_id, tocken, data, res);
+          sendMessage(phone_no_id, tocken, data, res);
         },
       } 
     if(msg_body=="Hii"){
