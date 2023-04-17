@@ -83,7 +83,7 @@ app.post("/webhook",(req,res)=>{
           data : data
         };
         
-        axios.request(config)
+        axios(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
         })
