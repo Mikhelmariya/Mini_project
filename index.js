@@ -97,7 +97,7 @@ app.post("/webhook",(req,res)=>{
           console.log("Name function called");
           let data = JSON.stringify({
             "messaging_product": "whatsapp",
-            "to": "919207390779",
+            "to": "918714013839",
             "type": "template",
             "template": {
               "name": "hello_world",
