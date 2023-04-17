@@ -75,14 +75,14 @@ app.post("/webhook",(req,res)=>{
           method: 'post',
           maxBodyLength: Infinity,
           url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-        
+
         headers: { 
             'Content-Type': 'application/json', 
             'Authorization': 'Bearer EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD'
           },
           data : data
         };
-        
+
         axios.request(config)
         .then((response) => {
           console.log(JSON.stringify(response.data));
@@ -90,7 +90,6 @@ app.post("/webhook",(req,res)=>{
         .catch((error) => {
           console.log(error);
         });
-          
         }
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
