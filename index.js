@@ -108,6 +108,7 @@ app.post("/webhook",(req,res)=>{
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
+       
           let data = JSON.stringify({
             "messaging_product": "whatsapp",
             "to": "919207390779",
@@ -119,11 +120,10 @@ app.post("/webhook",(req,res)=>{
               }
             }
           });
-          
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
               'Authorization': 'Bearer EAAKl03DggZBYBAB5FWmwU9C2zPojQy9av6DJYV9vsFrJFpK4sFVVtZBngZARP4midAMNFmx0nZACH1zAsxHwGqadJCzNbsxem9Wn343R5UcM7i76YIF7K4UZCZBIeq2TeThJMlELgaWqLH3PqYRfZAtUqRplBjcqTDoj8qb63rZCNlDkeQIMBxzFBKPxvAeKIZCLPiDo8QkXIigZDZD'
