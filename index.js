@@ -11,6 +11,7 @@ require('dotenv').config();
 
  const myTocken="mikhel"
  const tocken="EAAKl03DggZBYBAB5FWmwU9C2zPojQy9av6DJYV9vsFrJFpK4sFVVtZBngZARP4midAMNFmx0nZACH1zAsxHwGqadJCzNbsxem9Wn343R5UcM7i76YIF7K4UZCZBIeq2TeThJMlELgaWqLH3PqYRfZAtUqRplBjcqTDoj8qb63rZCNlDkeQIMBxzFBKPxvAeKIZCLPiDo8QkXIigZDZD"
+app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
 let token= req.query["hub.verify_token"];
@@ -34,7 +35,7 @@ else{
 
 
 
-
+});
 
 app.post("/webhook",(req,res)=>{
 
