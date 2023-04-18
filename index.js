@@ -106,38 +106,6 @@ app.post("/webhook",(req,res)=>{
       //   },
       // } 
       module.exports ={
-        content: function (phone_no_id, tocken, from, res) {
-          let data = JSON.stringify({
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": from,
-            "type": "text",
-            "text": {
-              "preview_url": false,
-              "body": "text-message-content"
-            }
-          });
-          
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-            headers: { 
-              'Authorization': 'Bearer EAAKl03DggZBYBAB5FWmwU9C2zPojQy9av6DJYV9vsFrJFpK4sFVVtZBngZARP4midAMNFmx0nZACH1zAsxHwGqadJCzNbsxem9Wn343R5UcM7i76YIF7K4UZCZBIeq2TeThJMlELgaWqLH3PqYRfZAtUqRplBjcqTDoj8qb63rZCNlDkeQIMBxzFBKPxvAeKIZCLPiDo8QkXIigZDZD', 
-              'Content-Type': 'application/json'
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-        },
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
        
@@ -178,13 +146,11 @@ app.post("/webhook",(req,res)=>{
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
     }
-    else if(msg_body=="Hello"){
-      module.exports.content(phone_no_id, tocken, from, res);
       }
              }
       }
             
-    }
+   
 );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
