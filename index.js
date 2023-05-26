@@ -65,46 +65,7 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
-      // function sendMessage(phone_no_id, tocken, data, res) {
-      //   let config = {
-      //     method: 'post',
-      //     maxBodyLength: Infinity,
-      //     url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-
-      //   headers: { 
-      //       'Content-Type': 'application/json', 
-      //       'Authorization': 'Bearer EAAKl03DggZBYBAMFfqzAmaYlDKUwy2XF6wpYlcYjxR4QNOInI6blnNh9ihLoWeZCp3ErYqmJPB3xMwKWD57z3FFjYsuOFqftt7Cbs8JJabfHgZAKrL6bEfZCIGD8M8wKam9GGIyKw3GMMZBjTGjMt63ctZBf8JapDxawpd7Hi7uq3yvvyNbGqQQhRXvVpDNIWiqlBuc7WEQQZDZD'
-      //     },
-      //     data : data
-      //   };
-
-      //   axios.request(config)
-      //   .then((response) => {
-      //     console.log(JSON.stringify(response.data));
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
-      //   }
-      // module.exports ={
-      //   name: function (phone_no_id, tocken, from, res) {
-      //     console.log("Name function called");
-      //     let data = JSON.stringify({
-      //       "messaging_product": "whatsapp",
-      //       "to": "8714013839",
-      //       "type": "template",
-      //       "template": {
-      //         "name": "hello_world",
-      //         "language": {
-      //           "code": "en_US"
-      //         }
-      //       }
-      //     });
-          
-          
-      //     sendMessage(phone_no_id, tocken, data, res);
-      //   },
-      // } 
+      
       module.exports ={
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
@@ -141,11 +102,107 @@ app.post("/webhook",(req,res)=>{
           
           // sendMessage(phone_no_id, tocken, data, res);
         },
+        event: function (phone_no_id, tocken, from, res) {
+          let data = JSON.stringify({
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "918714013839",
+            "type": "interactive",
+            "interactive": {
+              "type": "list",
+              "header": {
+                "type": "text",
+                "text": "<HEADER_TEXT>"
+              },
+              "body": {
+                "text": "<BODY_TEXT>"
+              },
+              "footer": {
+                "text": "<FOOTER_TEXT>"
+              },
+              "action": {
+                "button": "Event Categories",
+                "sections": [
+                  {
+                    "title": "Technical Events",
+                    "rows": [
+                      {
+                        "id": "<LIST_SECTION_1_ROW_1_ID>",
+                        "title": "<SECTION_1_ROW_1_TITLE>",
+                        "description": "<SECTION_1_ROW_1_DESC>"
+                      },
+                      {
+                        "id": "<LIST_SECTION_1_ROW_2_ID>",
+                        "title": "<SECTION_1_ROW_2_TITLE>",
+                        "description": "<SECTION_1_ROW_2_DESC>"
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Cultural Events",
+                    "rows": [
+                      {
+                        "id": "<LIST_SECTION_2_ROW_1_ID>",
+                        "title": "<SECTION_2_ROW_1_TITLE>",
+                        "description": "<SECTION_2_ROW_1_DESC>"
+                      },
+                      {
+                        "id": "<LIST_SECTION_2_ROW_2_ID>",
+                        "title": "<SECTION_2_ROW_2_TITLE>",
+                        "description": "<SECTION_2_ROW_2_DESC>"
+                      },
+                      {
+                        "title": "Pro Show",
+                        "rows": [
+                          {
+                            "id": "<LIST_SECTION_1_ROW_1_ID>",
+                            "title": "<SECTION_1_ROW_1_TITLE>",
+                            "description": "<SECTION_1_ROW_1_DESC>"
+                          },
+                          {
+                            "id": "<LIST_SECTION_1_ROW_2_ID>",
+                            "title": "<SECTION_1_ROW_2_TITLE>",
+                            "description": "<SECTION_1_ROW_2_DESC>"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          });
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': 'Bearer EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD'
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+          
+          
+        }
       } 
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
     }
+    else if(msg_body=="Event"){
+      module.exports.event(phone_no_id, tocken, from, res);
+    }
+    
+
       }
              }
       }
