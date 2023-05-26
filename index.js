@@ -103,6 +103,7 @@ app.post("/webhook",(req,res)=>{
           // sendMessage(phone_no_id, tocken, data, res);
         },
         event: function (phone_no_id, tocken, from, res) {
+          
           let data = JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
@@ -172,13 +173,14 @@ app.post("/webhook",(req,res)=>{
               }
             }
           });
+          
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD'
+              'Authorization': 'Bearer EAAKcYncP8UUBAOCZCsR4eChztgnsNwhZAiY60POyDZBcZB5ER0acKbqC4AF3cHAmYHwDVa7ThZAzoZB7Vpfb0GBxSHyZB3iBDbAoHMraVffF8e23oajayugG588JrvVzHuZAIVonfgsxUtiZAvyzBlamqENvFmr1CBwMcTo5mCAVKOQZBZCaxQtX6Gw'
             },
             data : data
           };
@@ -190,6 +192,7 @@ app.post("/webhook",(req,res)=>{
           .catch((error) => {
             console.log(error);
           });
+          
           
           
         }
