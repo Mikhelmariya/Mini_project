@@ -102,108 +102,13 @@ app.post("/webhook",(req,res)=>{
           
           // sendMessage(phone_no_id, tocken, data, res);
         },
-        event: function (phone_no_id, tocken, from, res) {
-          
-          let data = JSON.stringify({
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": "918714013839",
-            "type": "interactive",
-            "interactive": {
-              "type": "list",
-              "header": {
-                "type": "text",
-                "text": "<HEADER_TEXT>"
-              },
-              "body": {
-                "text": "<BODY_TEXT>"
-              },
-              "footer": {
-                "text": "<FOOTER_TEXT>"
-              },
-              "action": {
-                "button": "Event Categories",
-                "sections": [
-                  {
-                    "title": "Technical Events",
-                    "rows": [
-                      {
-                        "id": "<LIST_SECTION_1_ROW_1_ID>",
-                        "title": "<SECTION_1_ROW_1_TITLE>",
-                        "description": "<SECTION_1_ROW_1_DESC>"
-                      },
-                      {
-                        "id": "<LIST_SECTION_1_ROW_2_ID>",
-                        "title": "<SECTION_1_ROW_2_TITLE>",
-                        "description": "<SECTION_1_ROW_2_DESC>"
-                      }
-                    ]
-                  },
-                  {
-                    "title": "Cultural Events",
-                    "rows": [
-                      {
-                        "id": "<LIST_SECTION_2_ROW_1_ID>",
-                        "title": "<SECTION_2_ROW_1_TITLE>",
-                        "description": "<SECTION_2_ROW_1_DESC>"
-                      },
-                      {
-                        "id": "<LIST_SECTION_2_ROW_2_ID>",
-                        "title": "<SECTION_2_ROW_2_TITLE>",
-                        "description": "<SECTION_2_ROW_2_DESC>"
-                      },
-                      {
-                        "title": "Pro Show",
-                        "rows": [
-                          {
-                            "id": "<LIST_SECTION_1_ROW_1_ID>",
-                            "title": "<SECTION_1_ROW_1_TITLE>",
-                            "description": "<SECTION_1_ROW_1_DESC>"
-                          },
-                          {
-                            "id": "<LIST_SECTION_1_ROW_2_ID>",
-                            "title": "<SECTION_1_ROW_2_TITLE>",
-                            "description": "<SECTION_1_ROW_2_DESC>"
-                          }
-                        ]
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          });
-          
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
-            headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKcYncP8UUBAOCZCsR4eChztgnsNwhZAiY60POyDZBcZB5ER0acKbqC4AF3cHAmYHwDVa7ThZAzoZB7Vpfb0GBxSHyZB3iBDbAoHMraVffF8e23oajayugG588JrvVzHuZAIVonfgsxUtiZAvyzBlamqENvFmr1CBwMcTo5mCAVKOQZBZCaxQtX6Gw'
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-          
-          
-        }
+      
       } 
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
     }
-    else if(msg_body=="Event"){
-      module.exports.event(phone_no_id, tocken, from, res);
-    }
+   
     
 
       }
