@@ -10,7 +10,7 @@ require('dotenv').config();
 
 
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAB5FWmwU9C2zPojQy9av6DJYV9vsFrJFpK4sFVVtZBngZARP4midAMNFmx0nZACH1zAsxHwGqadJCzNbsxem9Wn343R5UcM7i76YIF7K4UZCZBIeq2TeThJMlELgaWqLH3PqYRfZAtUqRplBjcqTDoj8qb63rZCNlDkeQIMBxzFBKPxvAeKIZCLPiDo8QkXIigZDZD"
+ const tocken="EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -126,7 +126,7 @@ app.post("/webhook",(req,res)=>{
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKl03DggZBYBAB5FWmwU9C2zPojQy9av6DJYV9vsFrJFpK4sFVVtZBngZARP4midAMNFmx0nZACH1zAsxHwGqadJCzNbsxem9Wn343R5UcM7i76YIF7K4UZCZBIeq2TeThJMlELgaWqLH3PqYRfZAtUqRplBjcqTDoj8qb63rZCNlDkeQIMBxzFBKPxvAeKIZCLPiDo8QkXIigZDZD'
+              'Authorization': 'Bearer EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD'
             },
             data : data
           };
