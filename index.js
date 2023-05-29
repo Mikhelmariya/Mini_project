@@ -1,7 +1,6 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
-//old tok =EAAKl03DggZBYBAI6kMrIzCqh7HDeNEdj22waZA7dweyPItOeLcnN43Kw1CyTyZAk9zZBLdnT3sZALBqiugPEnTBc6WPZBl6JqwCQ2t9R30DBBzKsxitZCiLfgnumvkHNYy6kmD2iBdM7JzatN3zVt2XHEQ921kcXDZBOheZC9lZBVfyYug5QhAod3A
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -10,7 +9,7 @@ require('dotenv').config();
 
 
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD"
+ const tocken="EAAKl03DggZBYBAKxX9ezlWoftgUT7HJHJzW20hIkZAkQGYYPcN3cURL5u3pWluD2jnn6iTYjAYZBsRJ7jygiLOeYM004hBpuhYl9r20dORPZCIdvUwDc0M1ixdgN1SEmkZBe7lfdSxt4xaKgavGfd2nZBFflUi4spjW08fd7kQTKnp14loIbbM8p4nnK0TNpqLDeqaLPBpOgZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -87,7 +86,7 @@ app.post("/webhook",(req,res)=>{
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer EAAKl03DggZBYBAHZAQeyLjvMSk0TtB6pbiTSrCW3NrnrZCjXoNupFXkDKZA8DpQmkXL5FCZCxh065QsGRZAgrhhIsGTZBqzex2fc8UlnwFbCi3i61uCo6TuNXLHubxtgCHxmG0m3ZCwQNorogIo5Dgw2KdLpncmMNVZAHCWIo5H4Fs5K3hf7Jv9h9u3ayi0miZAZCuLvkEqvIXGggZDZD'
+              'Authorization': 'Bearer'+ tocken 
             },
             data : data
           };
