@@ -9,7 +9,7 @@ require('dotenv').config();
 
 
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBALBxOkUt6uEeTEtnS6Q9U005fNe0IORIfoaJS2voUk74sRAIOFWdZA5GufcPf3m0URUB0SzZAbzQEoRSAKbVvZCq9xLZAkATsAdHjFPs4pgptNhF2vkPLNbf8ToHRceRS7lOQhWDj82OLPIw5I497btWo7U39tgSffNQHHVxvL1jCI7E6WPqT7ENkRdAewZDZD"
+ const tocken="EAAKl03DggZBYBAJpJ5QnL7SrPb27OMyCzvryzlHPYFZBTzvBHQeer4XrUWs7LGcZCr0EgnCTDtpqNkqH8mY4iXjA6RXrcPdsRhlzARpqgNdJuFQSKqwHBZC9nAndYk1pNANfH6pq7e6ird001vklpNg8BEcAXFoacMa2R01qgMTCDFl5LMZAHyO0wbkMpksuBfHHGLFyEMQZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -101,13 +101,45 @@ app.post("/webhook",(req,res)=>{
           
           // sendMessage(phone_no_id, tocken, data, res);
         },
-      
+        custom: function (phone_no_id, tocken, from, res) {
+          let data = JSON.stringify({
+            "messaging_product": "whatsapp",
+            "recipient_type": "individual",
+            "to": "917994186005",
+            "type": "text",
+            "text": {
+              "preview_url": false,
+              "body": "Text message template"
+            }
+          });
+          let config = {
+            method: 'post',
+            maxBodyLength: Infinity,
+            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
+            headers: { 
+              'Content-Type': 'application/json', 
+              'Authorization': 'Bearer'+ tocken 
+            },
+            data : data
+          };
+          
+          axios.request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        }
       } 
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
     }
-   
+    else if(msg_body=="Hello"){
+      console.log("inside else msg_body");
+      module.exports.custom(phone_no_id, tocken, from, res);
+    }
     
 
       }
