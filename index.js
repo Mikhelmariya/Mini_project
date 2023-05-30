@@ -150,11 +150,7 @@ app.post("/webhook",(req,res)=>{
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
-      console.log("id"+id);
-      if(msg_body=="S1"){
-        console.log("inside if msg_body");
-        module.exports.name(phone_no_id, tocken, from, res);
-      }
+      
     }
     // else if(msg_body=="Hello"){
     //   console.log("inside else msg_body");
