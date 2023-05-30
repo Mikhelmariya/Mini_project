@@ -149,35 +149,6 @@ app.post("/webhook",(req,res)=>{
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
       
-let data = JSON.stringify({
-  "messaging_product": "whatsapp",
-  "recipient_type": "individual",
-  "to": "917994186005",
-  "type": "text",
-  "text": {
-    "preview_url": false,
-    "body": "Thank you for selecting the option. Visit our website for more information."
-  }
-});
-
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-  headers: { 
-    'Authorization': 'Bearer'+tocken, 
-    'Content-Type': 'application/json'
-  },
-  data : data
-};
-
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
 
   }
     // else if(msg_body=="Hello"){
