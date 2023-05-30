@@ -147,7 +147,7 @@ app.post("/webhook",(req,res)=>{
         },
         
       } 
-    if(msg_body=="Hii"){
+    if(msg_body!=NULL){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
       
