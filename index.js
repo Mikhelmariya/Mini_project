@@ -82,7 +82,7 @@ app.post("/webhook",(req,res)=>{
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
+            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
               'Authorization': 'Bearer '+tocken 
