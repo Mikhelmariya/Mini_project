@@ -150,6 +150,37 @@ app.post("/webhook",(req,res)=>{
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
+      if(msg_body=="S1"){
+        const axios = require('axios');
+let data = JSON.stringify({
+  "messaging_product": "whatsapp",
+  "to": "917994186005",
+  "text": {
+    "preview_url": true,
+    "body": "Please visit https://youtu.be/hpltvTEiRrY."
+  }
+});
+
+let config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer'+tocken
+  },
+  data : data
+};
+
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
+
+      }
       
     }
     // else if(msg_body=="Hello"){
