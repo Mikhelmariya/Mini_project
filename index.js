@@ -71,13 +71,12 @@ app.post("/webhook",(req,res)=>{
        
           let data = JSON.stringify({
             "messaging_product": "whatsapp",
-            "to": from,
-            "type": "template",
-            "template": {
-              "name": "hello_world",
-              "language": {
-                "code": "en_US"
-              }
+            "recipient_type": "individual",
+            "to": "917994186005",
+            "type": "text",
+            "text": {
+              "preview_url": false,
+              "body": "Welcome to  TEDx TKM\nPick one of these options to get started\n1.About TEDx TKM\n2.Know the speakers\n3.Book tickets\n4.Contact Organisers"
             }
           });
           let config = {
