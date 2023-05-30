@@ -73,16 +73,61 @@ app.post("/webhook",(req,res)=>{
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
             "to": "917994186005",
-            "type": "text",
-            "text": {
-              "preview_url": false,
-              "body": "Welcome to  TEDx TKM\nPick one of these options to get started\n1.About TEDx TKM\n2.Know the speakers\n3.Book tickets\n4.Contact Organisers"
+            "type": "interactive",
+            "interactive": {
+              "type": "list",
+              "header": {
+                "type": "text",
+                "text": "Hey! Welcome!\nI'm your Virtual mentor"
+              },
+              "body": {
+                "text": "I'm here to help you"
+              },
+              "footer": {
+                "text": "Everything you need is here"
+              },
+              "action": {
+                "button": "Options",
+                "sections": [
+                  {
+                    "title": "First year",
+                    "rows": [
+                      {
+                        "id": "<LIST_SECTION_1_ROW_1_ID>",
+                        "title": "S1",
+                        "description": ""
+                      },
+                      {
+                        "id": "<LIST_SECTION_1_ROW_2_ID>",
+                        "title": "S2",
+                        "description": ""
+                      }
+                    ]
+                  },
+                  {
+                    "title": "Second year",
+                    "rows": [
+                      {
+                        "id": "<LIST_SECTION_2_ROW_1_ID>",
+                        "title": "S3",
+                        "description": ""
+                      },
+                      {
+                        "id": "<LIST_SECTION_2_ROW_2_ID>",
+                        "title": "S4",
+                        "description": ""
+                      }
+                    ]
+                  }
+                ]
+              }
             }
           });
+          
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
               'Authorization': 'Bearer '+tocken 
