@@ -9,7 +9,7 @@ require('dotenv').config();
 
 
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAJpJ5QnL7SrPb27OMyCzvryzlHPYFZBTzvBHQeer4XrUWs7LGcZCr0EgnCTDtpqNkqH8mY4iXjA6RXrcPdsRhlzARpqgNdJuFQSKqwHBZC9nAndYk1pNANfH6pq7e6ird001vklpNg8BEcAXFoacMa2R01qgMTCDFl5LMZAHyO0wbkMpksuBfHHGLFyEMQZDZD"
+ const tocken="EAAKl03DggZBYBAGCoZBLwWB0uHvnlwTWGACnnipSOMqX9uNlghfW9iFE9g3rqZAV0GP8BslCZAjTdUkO9eapwUaw2xsbvGW72iZA6ZBj8iZCPRZBjanUiZAgk3RhbzLCWIZCj54VI6uoL37MyqjurGZCnMiQb9dO6ZAL66e4aFs0MzJayIvvesMfJnHyMH7QdiiJp0LYj92SZBtrdFAZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -65,7 +65,7 @@ app.post("/webhook",(req,res)=>{
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
       
-      module.exports ={
+      module.exports = {
         name: function (phone_no_id, tocken, from, res) {
           console.log("Name function called");
        
@@ -86,7 +86,7 @@ app.post("/webhook",(req,res)=>{
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer'+ tocken 
+              'Authorization': 'Bearer '+tocken 
             },
             data : data
           };
@@ -99,47 +99,18 @@ app.post("/webhook",(req,res)=>{
             console.log(error);
           });
           
-          // sendMessage(phone_no_id, tocken, data, res);
+           
         },
-        custom: function (phone_no_id, tocken, from, res) {
-          let data = JSON.stringify({
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": "917994186005",
-            "type": "text",
-            "text": {
-              "preview_url": false,
-              "body": "Text message template"
-            }
-          });
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
-            headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': 'Bearer'+ tocken 
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-        }
+        
       } 
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
     }
-    else if(msg_body=="Hello"){
-      console.log("inside else msg_body");
-      module.exports.custom(phone_no_id, tocken, from, res);
-    }
+    // else if(msg_body=="Hello"){
+    //   console.log("inside else msg_body");
+    //   module.exports.custom(phone_no_id, tocken, from, res);
+    // }
     
 
       }
