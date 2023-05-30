@@ -67,9 +67,7 @@ app.post("/webhook",(req,res)=>{
       
       module.exports = {
         name: function (phone_no_id, tocken, from, res) {
-          console.log("Name function called");
-       
-          let data = JSON.stringify({
+        let data = JSON.stringify({
             "messaging_product": "whatsapp",
             "recipient_type": "individual",
             "to": "917994186005",
@@ -150,14 +148,15 @@ app.post("/webhook",(req,res)=>{
     if(msg_body=="Hii"){
       console.log("inside if msg_body");
       module.exports.name(phone_no_id, tocken, from, res);
-      if(msg_body=="S1"){
-        const axios = require('axios');
+      
 let data = JSON.stringify({
   "messaging_product": "whatsapp",
+  "recipient_type": "individual",
   "to": "917994186005",
+  "type": "text",
   "text": {
-    "preview_url": true,
-    "body": "Please visit https://youtu.be/hpltvTEiRrY."
+    "preview_url": false,
+    "body": "Thank you for selecting the option. Visit our website for more information."
   }
 });
 
@@ -166,8 +165,8 @@ let config = {
   maxBodyLength: Infinity,
   url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
   headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer'+tocken
+    'Authorization': 'Bearer'+tocken, 
+    'Content-Type': 'application/json'
   },
   data : data
 };
@@ -180,9 +179,7 @@ axios.request(config)
   console.log(error);
 });
 
-      }
-      
-    }
+  }
     // else if(msg_body=="Hello"){
     //   console.log("inside else msg_body");
     //   module.exports.custom(phone_no_id, tocken, from, res);
