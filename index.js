@@ -9,7 +9,7 @@ require('dotenv').config();
 
 
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAHwKoXjLMVHRCRAVzlPjmHt8gG8ZCDcOYFsAIX8CU2BnC7xnPHnwAL8yPxTbqpXIWD64cNWvk82HZA8DzvEBv2owUCkPZCVwl5f1WM4azZA2GngW9bPUkhjBYITZAS2bHjzUt6uzkcfQq0DnmIE8UThuMfBIKgr2ZBHF1WG6zZAIR3PiNYa5sijZAzk3MHjCrwZDZD"
+ const tocken="EAAKl03DggZBYBANslhSHFI1Q9Mjb5AMsQZBoah3xQKwCNmQSSDj7QQu59j1rJOWiHJKCfTYVggczDSbKdSV94Vd6BAmNZBxzOGGJMKUCtGaipjuUwN1iyWz4ZA4qARVmEFJQZBaoxzAp5nsGZBj1NsTYCEb6ZAXMNdGSE9kbfOwoJn4ii7peBEGNMgCZBCtkjOWsoZChcPbZC04AZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"];
 let challange= req.query["hub.challenge"];
@@ -92,12 +92,12 @@ app.post("/webhook",(req,res)=>{
                     "rows": [
                       {
                         "id": "<LIST_SECTION_1_ROW_1_ID>",
-                        "title": "S1",
+                        "title": "Coding club",
                         "description": ""
                       },
                       {
                         "id": "<LIST_SECTION_1_ROW_2_ID>",
-                        "title": "S2",
+                        "title": "IEDC",
                         "description": ""
                       }
                     ]
@@ -107,12 +107,12 @@ app.post("/webhook",(req,res)=>{
                     "rows": [
                       {
                         "id": "<LIST_SECTION_2_ROW_1_ID>",
-                        "title": "S3",
+                        "title": "CSI",
                         "description": ""
                       },
                       {
                         "id": "<LIST_SECTION_2_ROW_2_ID>",
-                        "title": "S4",
+                        "title": "IEEE",
                         "description": ""
                       }
                     ]
