@@ -93,7 +93,7 @@ app.post("/webhook",(req,res)=>{
                       {
                         "id": "<LIST_SECTION_1_ROW_1_ID>",
                         "title": "Coding club",
-                        "description": ""
+                        "description": "Coding Club TKMCE is a vibrant community of passionate programmers at TKM College of Engineering, where members collaborate, learn, and innovate together, creating a dynamic space for coding enthusiasts to thrive."
                       },
                       {
                         "id": "<LIST_SECTION_1_ROW_2_ID>",
