@@ -126,7 +126,7 @@ app.post("/webhook",(req,res)=>{
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer'+tocken 
+              'Authorization': 'Bearer '+tocken 
             },
             data : data
           };
