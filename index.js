@@ -79,7 +79,7 @@ const runPrompt = async() =>{
     });
     console.log(response.data);
 
-    const config = {
+    let config = {
       method: 'post',
       maxBodyLength: Infinity,
       url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
