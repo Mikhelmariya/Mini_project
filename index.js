@@ -63,9 +63,9 @@ app.post("/webhook",(req,res)=>{
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
         const{Configuration, OpenAIApi}=require("openai");
-// const config = new Configuration({
-//     apiKey:"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",
-// });
+const config = new Configuration({
+    apiKey:"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",
+});
 
 const openai = new OpenAIApi(config);
 const runPrompt = async() =>{
@@ -79,24 +79,24 @@ const runPrompt = async() =>{
     });
     console.log(response.data);
 
-    let config = {
-      method: 'post',
-      maxBodyLength: Infinity,
-      url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-      headers: { 
-        'Content-Type': 'application/json', 
-        'Authorization': 'Bearer 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' 
-      },
-      data : response.data
-    };
+    // let config = {
+    //   method: 'post',
+    //   maxBodyLength: Infinity,
+    //   url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+    //   headers: { 
+    //     'Content-Type': 'application/json', 
+    //     'Authorization': 'Bearer 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' 
+    //   },
+    //   data : response.data
+    // };
     
-    axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+    // axios.request(config)
+    // .then((response) => {
+    //   console.log(JSON.stringify(response.data));
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
 };
 
 
