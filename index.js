@@ -1,3 +1,4 @@
+const getOpenai=require("./controller");
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
@@ -8,8 +9,10 @@ require('dotenv').config();
 
 
 
+
+
  const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAFwQRt07VcGCzdzZCzblRXwR6bKaZAFdAd8Qk44bREO1O6CChp0nUiVNsbIPHbaj6cZBG333zuXOGimiVItiVEF1ItZCHaLawODkE8Ub6LbJynQSx82AN05KOTMyv5WXNPStyZA1ZBgI2vATxBEuZC6bZADBzQXTt99O1caTZBLJxTuww1lHyDJAcZA1nnvZAurHQZDZD"
+ const tocken="EAAKl03DggZBYBAP1rLwE1IfnF7LEYtssz0R4mx6PTtRVJoX31OCQwUpvC2zCFV6MzlEMs28Uoyqkj7nN9lgsH4XWVmiTmdJXktngZAZB5uRBkZCZAyrXTsEy4cW8a6S9ZC7oZBR7UTMTsyDKL6bT7VFlv8vLnwubeD86MyRSnoI76XtBvk86ZAoSWEL2mtZB4SkJFgMTsRsQ3OAZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
 let challange= req.query["hub.challenge"];
@@ -147,6 +150,7 @@ app.post("/webhook",(req,res)=>{
       } 
     if(msg_body=="Hii"){
       module.exports.name(phone_no_id, tocken, from, res);
+       getOpenai(msg_body);
     }
     // else{
     //   console.log("else");
