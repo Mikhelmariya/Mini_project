@@ -62,7 +62,24 @@ app.post("/webhook",(req,res)=>{
         console.log("id "+id);
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
-        
+        const{Configuration, OpenAIApi}=require("openai");
+const config = new Configuration({
+    apiKey:"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",
+});
+
+const openai = new OpenAIApi(config);
+const runPrompt = async() =>{
+    const prompt = "what is chatgpt";
+    const response= await openai.createCompletion({
+        model:"text-davinci-003",
+        prompt: prompt,
+        max_tokens: 20,
+        temperature: 1,
+    });
+    console.log(response.data);
+};
+
+runPrompt();
       
       module.exports = {
         name: function (phone_no_id, tocken, from, res) {
@@ -144,9 +161,9 @@ app.post("/webhook",(req,res)=>{
         },
         
       } 
-    if(msg_body=="Hii"){
-      module.exports.name(phone_no_id, tocken, from, res);
-    }
+    // if(msg_body=="Hii"){
+    //   module.exports.name(phone_no_id, tocken, from, res);
+    // }
 
     
    
