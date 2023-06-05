@@ -63,12 +63,30 @@ app.post("/webhook",(req,res)=>{
         console.log(body_param.entry[0].changes[0].value.messages[0].type);
         
         const{Configuration, OpenAIApi}=require("openai");
-const config = new Configuration({
-    apiKey:"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",
-});
+// const config = new Configuration({
+//     apiKey:"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",
+// });
+const config = {
+  method: 'post',
+  maxBodyLength: Infinity,
+  url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+  headers: { 
+    'Content-Type': 'application/json', 
+    'Authorization': 'Bearer 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' 
+  },
+  data : data
+};
 
+axios.request(config)
+.then((response) => {
+  console.log(JSON.stringify(response.data));
+})
+.catch((error) => {
+  console.log(error);
+});
 const openai = new OpenAIApi(config);
 const runPrompt = async() =>{
+    console.log("running prompt");
     const prompt = "what is chatgpt";
     const response= await openai.createCompletion({
         model:"text-davinci-003",
@@ -79,7 +97,7 @@ const runPrompt = async() =>{
     console.log(response.data);
 };
 
-runPrompt();
+
       
       module.exports = {
         name: function (phone_no_id, tocken, from, res) {
@@ -161,9 +179,10 @@ runPrompt();
         },
         
       } 
-    // if(msg_body=="Hii"){
-    //   module.exports.name(phone_no_id, tocken, from, res);
-    // }
+    if(msg_body=="Hii"){
+    //  module.exports.name(phone_no_id, tocken, from, res);
+    runPrompt();
+    }
 
     
    
