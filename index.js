@@ -1,4 +1,4 @@
-//const getOpenai=require("./controller");
+
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
@@ -6,13 +6,8 @@ const axios = require("axios");
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 require('dotenv').config();
-
-
-
-
-
- const myTocken="mikhel"
- const tocken="EAAKl03DggZBYBAMZCQyDIEm4ONwRRNZCJAdBgPDzYKfu0TorrTSWTwa0EqD1NmSeEaFzGFU02ZC769taiKTcYvePiZB8o1fSaI4HEgyz2hEPZA3pysVKHwuGnem81iVDOxctSZCkjdSeWpUqQsrFHBRzDxjgj2g99HPld4NqzErdVMiZByjsXqUlvqZAjwhHn4f6NmcEhD4QKgQZDZD"
+const myTocken="mikhel"
+const tocken="EAAKl03DggZBYBANCZAZA5884wWAvabCxW33izk40Eb7JQOVAjmdkhRvwYs9cEBTwdOzvvByJUkZBbRRiZAThVFqVkkDy5hQXmvDEBuBeSIH1nOoPZC2r4w7cDGAa8ZB97XT0YDEJt2zqcvxotEvOP7ybqKhkpFvftaWj36DTCzoddD86xKyrxQBpOouFyl5yj2xqpAREBEZAPAZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
 let challange= req.query["hub.challenge"];
@@ -131,7 +126,7 @@ app.post("/webhook",(req,res)=>{
             url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
-              'Authorization': 'Bearer '+tocken 
+              'Authorization': 'Bearer'+tocken 
             },
             data : data
           };
