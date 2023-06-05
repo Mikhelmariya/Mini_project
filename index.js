@@ -66,24 +66,7 @@ app.post("/webhook",(req,res)=>{
 // const config = new Configuration({
 //     apiKey:"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",
 // });
-const config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-  headers: { 
-    'Content-Type': 'application/json', 
-    'Authorization': 'Bearer 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' 
-  },
-  data : data
-};
 
-axios.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-})
-.catch((error) => {
-  console.log(error);
-});
 const openai = new OpenAIApi(config);
 const runPrompt = async() =>{
     console.log("running prompt");
@@ -95,6 +78,25 @@ const runPrompt = async() =>{
         temperature: 1,
     });
     console.log(response.data);
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
+      headers: { 
+        'Content-Type': 'application/json', 
+        'Authorization': 'Bearer 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' 
+      },
+      data : response.data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 
