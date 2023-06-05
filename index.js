@@ -1,4 +1,4 @@
-const getOpenai=require("./controller");
+//const getOpenai=require("./controller");
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
@@ -150,7 +150,7 @@ app.post("/webhook",(req,res)=>{
       } 
     if(msg_body=="Hii"){
       module.exports.name(phone_no_id, tocken, from, res);
-       getOpenai(msg_body);
+       //getOpenai(msg_body);
     }
     // else{
     //   console.log("else");
