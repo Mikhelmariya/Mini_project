@@ -27,6 +27,7 @@ const response = await openai.createCompletion({
   presence_penalty: 0.0,
   stop: ["\n"],
 });
+   console.log(response);
     return response;
 }
 
