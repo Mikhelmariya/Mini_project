@@ -8,7 +8,7 @@ const app=express().use(body_parser.json());
 require('dotenv').config();
 
 const myTocken="mikhel"
-const tocken="EAAKl03DggZBYBANzTb2iFiDvofkLQYzQiZAVH53dHw39lbIK0oDRjmWbnCeHdFdnUjDzBLGQyIZCJS4eS0SESImZCt8ZA1FTHetzwhM1GAqgy8k3Iqsyh67Jo2cpvMfKSRZBvl9kUdQUaZA70SLRKfqNBB0qKbQI7zKcy1zaAnD8Gcsl4ZASWizZCM4NbZCGNid7XlRNFWZClf6YwZDZD"
+const tocken="EAAKl03DggZBYBABhUAU2tFBnczc17SjeSeEb3PKYQXTuiboGmxMwgn5VAtbbaBinxx3uO1l9U3w9yMYQb3x6GP2qSEZBZB5fKlwZAxKpUvIZBZCb8zLUAtayaaZA8yZBSQXDzLBLQFgaucv0GdrtVhYAZASOgnylV9Vp8rZAKyZALfXKyX7Tc6gcER1SdXzi0GKUxuWpaodzZBrkHAZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
 let challange= req.query["hub.challenge"];
@@ -62,7 +62,24 @@ app.post("/webhook",(req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
         
-         
+         axios.post(
+          process.env.WHATSAPP_SEND_MESSAGE_API,
+          {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: {
+              preview_url: false,
+              body: "HELLO I AM YOUR VIRTUAL MENTOR",
+            },
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + process.env.WHATSAPP_TOKEN,
+            },
+          }
+        );
        
 
 
@@ -129,7 +146,7 @@ app.post("/webhook",(req,res)=>{
           let config = {
             method: 'post',
             maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v13.0/100713606293834/messages',
+            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
             headers: { 
               'Content-Type': 'application/json', 
               'Authorization': 'Bearer '+tocken 
@@ -150,7 +167,7 @@ app.post("/webhook",(req,res)=>{
         
       } 
     if(msg_body=="Hii"){
-     module.exports.name(phone_no_id, tocken, from, res);
+     //module.exports.name(phone_no_id, tocken, from, res);
    }
 
     
