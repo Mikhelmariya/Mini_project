@@ -71,7 +71,7 @@ app.post("/webhook",(req,res)=>{
             type: "text",
             text: {
               preview_url: false,
-              body: reply,
+              body: "Hello, I am your virtual mentor",
             },
           },
           {
