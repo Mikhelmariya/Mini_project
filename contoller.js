@@ -30,4 +30,4 @@ const response = await openai.createCompletion({
     return response;
 }
 
-export default getOpenai;
+module.exports = getOpenai;
