@@ -2,6 +2,8 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
+const { getOpenai } = require("./controller"); // Replace "./controller" with the actual path to your controller.js file
+
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -62,6 +64,11 @@ app.post("/webhook",(req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
         
+        
+        const openaiResponse =  getOpenai(msg_body);
+        const reply = openaiResponse.choices[0].text.trim();
+        console.log("Reply from openai : "+reply);
+        
          axios.post(
           process.env.WHATSAPP_SEND_MESSAGE_API,
           {
@@ -71,7 +78,7 @@ app.post("/webhook",(req,res)=>{
             type: "text",
             text: {
               preview_url: false,
-              body: "HELLO I AM YOUR VIRTUAL MENTOR",
+              body: reply,
             },
           },
           {
