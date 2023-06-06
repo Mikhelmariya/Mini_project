@@ -79,6 +79,7 @@ app.post("/webhook",async (req,res)=>{
         console.log("openai response"+openaiResponse);
         const reply = openaiResponse.choices[0].text.trim();
         console.log("Reply from openai : "+reply);
+        console.log("reply to string"+reply.toString());
 
         
          axios.post(
@@ -90,7 +91,7 @@ app.post("/webhook",async (req,res)=>{
             type: "text",
             text: {
               preview_url: false,
-              body: reply.toString(),
+              body: "hii",
             },
           },
           {
