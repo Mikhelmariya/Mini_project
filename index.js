@@ -76,6 +76,7 @@ app.post("/webhook",async (req,res)=>{
         }
         
         const openaiResponse = await runPrompt(msg_body);
+        console.log("openai response"+openaiResponse);
         const reply = openaiResponse.choices[0].text.trim();
         console.log("Reply from openai : "+reply);
 
