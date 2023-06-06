@@ -90,7 +90,7 @@ app.post("/webhook",async (req,res)=>{
             type: "text",
             text: {
               preview_url: false,
-              body: reply,
+              body: reply.toString(),
             },
           },
           {
