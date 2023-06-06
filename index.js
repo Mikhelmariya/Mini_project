@@ -94,7 +94,7 @@ app.post("/webhook",async (req,res)=>{
           },
           {
             headers: {
-              Authorization: "Bearer EAAKl03DggZBYBAF2mjEGkZALBCLiL7s31WX6sSqjO1kjpgFhruKsrC0pzA40jousKRN1CQCq2WlOmOh2nft8aN5NYL7lVV9N1poW9kgTy2uwBDxihQalyFajtco72BMGRmYTo8CtkS6jc4MmFcZAdwxyFSjsaa6TKQf77ikZAKOgODZBhZAiW0bKWNQg0hyWwjI3xaM7hx1gZDZD",
+              Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
             },
           }
         );
