@@ -4,6 +4,7 @@ const body_parser = require("body-parser");
 const axios = require("axios");
 //const { getOpenai } = require("./contoller"); // Replace "./controller" with the actual path to your controller.js file
 const  getOpenai  = require("./contoller.js");
+const runPrompt = require("./contoller.js");
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -65,7 +66,8 @@ app.post("/webhook",async (req,res)=>{
         console.log("id "+id);
         
         try {
-          const response = await getOpenai("prompt_message");
+          console.log("Calling OpenAI");
+          const response = await runPrompt(msg_body);
           console.log(response);
           // Handle the response from OpenAI here
         } catch (error) {
@@ -73,10 +75,10 @@ app.post("/webhook",async (req,res)=>{
           // Handle the error
         }
         
-        const openaiResponse = await getOpenai(msg_body);
+        const openaiResponse = await runPrompt(msg_body);
         const reply = openaiResponse.choices[0].text.trim();
         console.log("Reply from openai : "+reply);
-        
+
         
          axios.post(
           process.env.WHATSAPP_SEND_MESSAGE_API,

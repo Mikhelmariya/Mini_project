@@ -1,34 +1,21 @@
-
-const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-    organization: "org-ElsHeEGTNIgAiJNYA5FHHC5s",
-    apiKey: process.env.OPENAI_API_KEY,
+const{Configuration, OpenAIApi}=require("openai");
+const config = new Configuration({
+    apiKey:"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",
 });
-const openai = new OpenAIApi(configuration);
 
+const openai = new OpenAIApi(config);
+const runPrompt = async(prompt_message) =>{
+    
+    const response= await openai.createCompletion({
+        model:"text-davinci-003",
+        prompt: prompt_message,
+        max_tokens: 20,
+        temperature: 1,
+    });
+    console.log(response.data);
+    return response.data;
+};
 
+//runPrompt(prompt_message);
 
-async function getOpenai(prompt_message) {
-    const { Configuration, OpenAIApi } = require("openai");
-
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-const response = await openai.createCompletion({
-  model: "text-davinci-003",
-  prompt: prompt_message,
-  temperature: 0,
-  max_tokens: 10,
-  top_p: 1,
-  frequency_penalty: 0.0,
-  presence_penalty: 0.0,
-  stop: ["\n"],
-});
-   console.log(response);
-    return response;
-}
-
-module.exports = getOpenai;
+module.exports = runPrompt;
