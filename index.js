@@ -37,7 +37,7 @@ else{
 
 });
 
-app.post("/webhook",(req,res)=>{
+app.post("/webhook",async (req,res)=>{
 
     const body_param = req.body;
     //check the incoming webhook message 
@@ -64,8 +64,16 @@ app.post("/webhook",(req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
         
+        try {
+          const response = await getOpenai("prompt_message");
+          console.log(response);
+          // Handle the response from OpenAI here
+        } catch (error) {
+          console.error("Error calling OpenAI:", error);
+          // Handle the error
+        }
         
-        const openaiResponse =  getOpenai(msg_body);
+        const openaiResponse = await getOpenai(msg_body);
         const reply = openaiResponse.choices[0].text.trim();
         console.log("Reply from openai : "+reply);
         
