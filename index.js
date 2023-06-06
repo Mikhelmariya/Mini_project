@@ -77,24 +77,24 @@ app.post("/webhook",async (req,res)=>{
         const reply = openaiResponse.choices[0].text.trim();
         console.log("Reply from openai : "+reply);
         
-        //  axios.post(
-        //   process.env.WHATSAPP_SEND_MESSAGE_API,
-        //   {
-        //     messaging_product: "whatsapp",
-        //     recipient_type: "individual",
-        //     to: from,
-        //     type: "text",
-        //     text: {
-        //       preview_url: false,
-        //       body: reply,
-        //     },
-        //   },
-        //   {
-        //     headers: {
-        //       Authorization: "Bearer " + process.env.WHATSAPP_TOKEN,
-        //     },
-        //   }
-        // );
+         axios.post(
+          process.env.WHATSAPP_SEND_MESSAGE_API,
+          {
+            messaging_product: "whatsapp",
+            recipient_type: "individual",
+            to: from,
+            type: "text",
+            text: {
+              preview_url: false,
+              body: reply,
+            },
+          },
+          {
+            headers: {
+              Authorization: "Bearer " + process.env.WHATSAPP_TOKEN,
+            },
+          }
+        );
        
 
 
