@@ -74,6 +74,7 @@ app.post("/webhook",async (req,res)=>{
           console.error("Error calling OpenAI:", error);
           // Handle the error
         }
+        const reply= "Sorry, I didn't get you";
         if(msg_body=="Hii"){
           
           const openaiResponse = await runPrompt("Give a greeting message to the user");
