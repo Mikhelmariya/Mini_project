@@ -70,7 +70,7 @@ app.post("/webhook",async (req,res)=>{
         
         try {
           console.log("Calling OpenAI");
-          const response = await runPrompt(msg_body);
+          openaiResponse = await runPrompt(msg_body);
           console.log(response);
           // Handle the response from OpenAI here
         } catch (error) {
@@ -80,7 +80,7 @@ app.post("/webhook",async (req,res)=>{
          ///reply= "Sorry, I didn't get you";
       
   
-          const openaiResponse = await runPrompt(msg_body);
+          //const openaiResponse = await runPrompt(msg_body);
           console.log("openai response"+openaiResponse);
           reply = openaiResponse.trim();
           console.log("Reply from openai : "+reply);
