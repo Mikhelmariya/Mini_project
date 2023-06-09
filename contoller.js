@@ -5,7 +5,7 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
-const requestsPerInterval = 5; // Number of requests allowed per interval
+const requestsPerInterval = 1; // Number of requests allowed per interval
 const intervalMs = 1000; // Interval duration in milliseconds
 const limiter = new Limiter(requestsPerInterval, intervalMs);
 const runPrompt = async(prompt_message) =>{
