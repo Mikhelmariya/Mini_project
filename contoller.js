@@ -5,16 +5,15 @@ const config = new Configuration({
 
 const openai = new OpenAIApi(config);
 const runPrompt = async(prompt_message) =>{
-    
+    const prompt=prompt_message;
     
     const response= await openai.createChatCompletion({
         model:"gpt-3.5-turbo",
-        prompt: prompt_message,
-        messages: [{ role: 'system', content: 'You are a mentor for freshers coming to TKM College of engineering,Kollam.Start with a greeting message . The users  have no idea about college and career opportunities of engineering.They may not have  confidence to try out new things.They may be confused regarding clubs and its associated activities. Neither they  have idea about hackathons or importance of networking. Help students as a mentor to prosper in their career . Answer to all their queries in short but relevant guidance. If you dont understand the question, respond with a apology message . ' }, { role: 'user', content: prompt_message }],
+        messages: [{ role: 'system', content: 'You are a mentor for freshers coming to TKM College of engineering,Kollam.Start with a greeting message . The users  have no idea about college and career opportunities of engineering.They may not have  confidence to try out new things.They may be confused regarding clubs and its associated activities. Neither they  have idea about hackathons or importance of networking. Help students as a mentor to prosper in their career . Answer to all their queries in short but relevant guidance. If you dont understand the question, respond with a apology message . ' }, { role: 'user', content: prompt }],
         max_tokens: 20,
         temperature: 1,
     });
-    console.log(response.data);
+    console.log(response.data.choices[0].message.content);
     return response.data.choices[0].message.content;
 };
 
