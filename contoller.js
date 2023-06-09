@@ -6,6 +6,7 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 const runPrompt = async(prompt_message) =>{
     
+    
     const response= await openai.createCompletion({
         model:"text-davinci-003",
         prompt: prompt_message,

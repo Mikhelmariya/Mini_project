@@ -74,12 +74,20 @@ app.post("/webhook",async (req,res)=>{
           console.error("Error calling OpenAI:", error);
           // Handle the error
         }
+        if(msg_body=="Hii"){
+          
+          const openaiResponse = await runPrompt("Give a greeting message to the user");
+          const reply = openaiResponse.choices[0].text.trim();
+          console.log("Reply from openai : "+reply);
+        }
+        else{
+          const openaiResponse = await runPrompt(msg_body);
+          console.log("openai response"+openaiResponse);
+          const reply = openaiResponse.choices[0].text.trim();
+          console.log("Reply from openai : "+reply);
+          console.log("reply to string"+reply.toString());
+        }
         
-        const openaiResponse = await runPrompt(msg_body);
-        console.log("openai response"+openaiResponse);
-        const reply = openaiResponse.choices[0].text.trim();
-        console.log("Reply from openai : "+reply);
-        console.log("reply to string"+reply.toString());
 
         
          axios.post(
