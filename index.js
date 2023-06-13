@@ -70,8 +70,13 @@ app.post("/webhook",async (req,res)=>{
 
         const queue = [];
         let isProcessing = false;
+        queue.push({ msg_body, from }); // Enqueue the query
+
+    if (!isProcessing) {
+      processQueue(); // Start processing the queue if it's not already being processed
+    }
         
-         processQueue = async () => {
+         const processQueue = async () => {
           if (isProcessing || queue.length === 0) {
             return;
           }
@@ -124,7 +129,7 @@ app.post("/webhook",async (req,res)=>{
        
         };
 
-        processQueue();
+    
 
       
       module.exports = {
