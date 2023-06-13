@@ -2,7 +2,6 @@
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
-//const { getOpenai } = require("./contoller"); // Replace "./controller" with the actual path to your controller.js file
 const  getOpenai  = require("./contoller.js");
 
 
