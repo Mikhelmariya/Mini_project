@@ -90,15 +90,12 @@ app.post("/webhook",async (req,res)=>{
           openaiResponse = await runPrompt(msg_body);
           console.log("openai response"+openaiResponse);
 
-          // Handle the response from OpenAI here
+          
         } catch (error) {
           console.error("Error calling OpenAI:", error);
-          // Handle the error
+          
         }
-         ///reply= "Sorry, I didn't get you";
-      
-  
-          //const openaiResponse = await runPrompt(msg_body);
+         
           reply = openaiResponse.trim();
           console.log("Reply from openai : "+reply);
           console.log("reply to string"+reply.toString());
