@@ -74,12 +74,16 @@ app.post("/webhook",async (req,res)=>{
     
         
          const processQueue = async () => {
+          console.log("proscess queue inside");
           if (isProcessing || queue.length === 0) {
-            return;
+            console.log("Queue is empty or is being processed");
           }
-        
+          else{
           isProcessing = true;
           const { msg_body, from } = queue.shift();
+          }
+        
+          
         
         try {
           console.log("Calling OpenAI");
