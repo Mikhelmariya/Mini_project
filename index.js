@@ -67,6 +67,16 @@ app.post("/webhook",async (req,res)=>{
         console.log("Message from user : "+msg_body);
         console.log("user contact : "+from);
         console.log("id "+id);
+
+        const queue = [];
+        let isProcessing = false;
+        const processQueue = async () => {
+          if (isProcessing || queue.length === 0) {
+            return;
+          }
+        
+          isProcessing = true;
+          const { msg_body, from } = queue.shift();
         
         try {
           console.log("Calling OpenAI");
@@ -89,7 +99,7 @@ app.post("/webhook",async (req,res)=>{
         
 
         
-         axios.post(
+       await axios.post(
           process.env.WHATSAPP_SEND_MESSAGE_API,
           {
             messaging_product: "whatsapp",
@@ -107,8 +117,11 @@ app.post("/webhook",async (req,res)=>{
             },
           }
         );
-       
 
+        isProcessing = false;
+        processQueue(); 
+       
+        };
 
 
 
