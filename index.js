@@ -71,7 +71,7 @@ app.post("/webhook",async (req,res)=>{
         const queue = [];
         let isProcessing = false;
         
-        const processQueue = async () => {
+         processQueue = async () => {
           if (isProcessing || queue.length === 0) {
             return;
           }
