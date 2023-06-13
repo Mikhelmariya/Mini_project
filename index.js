@@ -93,6 +93,9 @@ app.post("/webhook",async (req,res)=>{
           
         } catch (error) {
           console.error("Error calling OpenAI:", error);
+          console.error("OpenAI Error Response:", error.response.data);
+    console.error("OpenAI Error Status:", error.response.status);
+    console.error("OpenAI Error Headers:", error.response.headers);
           
         }
          
