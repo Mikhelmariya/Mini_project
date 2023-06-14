@@ -2,7 +2,12 @@ const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
+const{Configuration, OpenAIApi}=require("openai");
+const config = new Configuration({
+    apiKey:process.env.OPENAI_API_KEY,
+});
 
+const openai = new OpenAIApi(config);
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());

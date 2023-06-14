@@ -1,5 +1,4 @@
 const{Configuration, OpenAIApi}=require("openai");
-const Limiter = require('limiter').RateLimiter;
 const config = new Configuration({
     apiKey:process.env.OPENAI_API_KEY,
 });
@@ -24,4 +23,7 @@ const runPrompt = async(prompt_message) =>{
 
 //runPrompt(prompt_message);
 
-module.exports = runPrompt;
+module.exports = {
+    openai,
+    runPrompt,
+  };
