@@ -93,7 +93,7 @@ app.post("/webhook",async (req,res)=>{
       }
          
           reply = openaiResponse.trim();
-          console.log("Reply from openai : "+reply);
+          console.log("Reply from ai : "+reply);
           
         
         
