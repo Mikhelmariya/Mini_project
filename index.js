@@ -1,10 +1,6 @@
-
 const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
-const  getOpenai  = require("./contoller.js");
-
-
 const runPrompt = require("./contoller.js");
 
 
@@ -13,7 +9,6 @@ const app=express().use(body_parser.json());
 require('dotenv').config();
 
 const myTocken="mikhel"
-const tocken="EAAKl03DggZBYBABhUAU2tFBnczc17SjeSeEb3PKYQXTuiboGmxMwgn5VAtbbaBinxx3uO1l9U3w9yMYQb3x6GP2qSEZBZB5fKlwZAxKpUvIZBZCb8zLUAtayaaZA8yZBSQXDzLBLQFgaucv0GdrtVhYAZASOgnylV9Vp8rZAKyZALfXKyX7Tc6gcER1SdXzi0GKUxuWpaodzZBrkHAZDZD"
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
 let challange= req.query["hub.challenge"];
@@ -85,19 +80,17 @@ app.post("/webhook",async (req,res)=>{
         
           
         
-        try {
+      try {
           console.log("Calling OpenAI");
           openaiResponse = await runPrompt(msg_body);
           console.log("openai response"+openaiResponse);
 
-          
-        } catch (error) {
+       } catch (error) {
           console.error("Error calling OpenAI:", error);
           console.error("OpenAI Error Response:", error.response.data);
-    console.error("OpenAI Error Status:", error.response.status);
-    console.error("OpenAI Error Headers:", error.response.headers);
-          
-        }
+          console.error("OpenAI Error Status:", error.response.status);
+          console.error("OpenAI Error Headers:", error.response.headers);
+      }
          
           reply = openaiResponse.trim();
           console.log("Reply from openai : "+reply);
@@ -135,90 +128,7 @@ app.post("/webhook",async (req,res)=>{
         }
 
       
-      module.exports = {
-        name: function (phone_no_id, tocken, from, res) {
-        let data = JSON.stringify({
-            "messaging_product": "whatsapp",
-            "recipient_type": "individual",
-            "to": "917994186005",
-            "type": "interactive",
-            "interactive": {
-              "type": "list",
-              "header": {
-                "type": "text",
-                "text": "Hey! Welcome!\nI'm your Virtual mentor"
-              },
-              "body": {
-                "text": "I'm here to help you"
-              },
-              "footer": {
-                "text": "Everything you need is here"
-              },
-              "action": {
-                "button": "Options",
-                "sections": [
-                  {
-                    "title": "",
-                    "rows": [
-                      {
-                        "id": "<LIST_SECTION_1_ROW_1_ID>",
-                        "title": "Coding club",
-                        "description": ""
-                      },
-                      {
-                        "id": "<LIST_SECTION_1_ROW_2_ID>",
-                        "title": "IEDC",
-                        "description": ""
-                      }
-                    ]
-                  },
-                  {
-                    "title": "",
-                    "rows": [
-                      {
-                        "id": "<LIST_SECTION_2_ROW_1_ID>",
-                        "title": "CSI",
-                        "description": ""
-                      },
-                      {
-                        "id": "<LIST_SECTION_2_ROW_2_ID>",
-                        "title": "IEEE",
-                        "description": ""
-                      }
-                    ]
-                  }
-                ]
-              }
-            }
-          });
-          
-          let config = {
-            method: 'post',
-            maxBodyLength: Infinity,
-            url: 'https://graph.facebook.com/v16.0/100713606293834/messages',
-            headers: { 
-              'Content-Type': 'application/json', 
-              'Authorization': 'Bearer '+tocken 
-            },
-            data : data
-          };
-          
-          axios.request(config)
-          .then((response) => {
-            console.log(JSON.stringify(response.data));
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-          
-           
-        },
-        
-      } 
-    if(msg_body=="Hii"){
-     //module.exports.name(phone_no_id, tocken, from, res);
-   }
-
+    
     
    
 
