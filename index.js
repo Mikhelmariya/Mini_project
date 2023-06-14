@@ -94,7 +94,7 @@ app.post("/webhook",async (req,res)=>{
          
           reply = openaiResponse.trim();
           console.log("Reply from openai : "+reply);
-          console.log("reply to string"+reply.toString());
+          
         
         
 
@@ -123,7 +123,7 @@ app.post("/webhook",async (req,res)=>{
        
         };
 
-        if (!isProcessing) {
+        if (!isProcessing && queue.length > 0) {
           processQueue(); // Start processing the queue if it's not already being processed
         }
 
