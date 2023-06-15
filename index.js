@@ -88,6 +88,9 @@ app.post("/webhook",async (req,res)=>{
       try {
           console.log("Calling OpenAI");
           openaiResponse = await runPrompt(msg_body);
+          if (openaiResponse === "") {
+            openaiResponse = "Can u reeat.";
+          }
           console.log("openai response"+openaiResponse);
 
        } catch (error) {

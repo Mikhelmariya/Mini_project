@@ -1,3 +1,4 @@
+const c = require("config");
 const{Configuration, OpenAIApi}=require("openai");
 const config = new Configuration({
     apiKey:process.env.OPENAI_API_KEY,
@@ -6,6 +7,8 @@ const config = new Configuration({
 const openai = new OpenAIApi(config);
 
 const runPrompt = async(prompt_message) =>{
+
+    console.log("inside run prompt");
 
     
     const prompt=prompt_message;
