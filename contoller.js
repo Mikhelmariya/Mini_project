@@ -23,7 +23,5 @@ const runPrompt = async(prompt_message) =>{
 
 //runPrompt(prompt_message);
 
-module.exports = {
-    openai,
-    runPrompt,
-  };
+module.exports = runPrompt;
+  
