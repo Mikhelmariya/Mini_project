@@ -68,9 +68,10 @@ app.post("/webhook",async (req,res)=>{
                     if (option === "id1") {
                       // Handle option 1 selection
                       selectedOption = option;
-                      console.log("Option 1 selected"+selectedOption);
-                      welcome.welcome_message(from);
+                      console.log("Option  selected in index.js"+selectedOption);
                       initialMessageSent= true;
+                      await welcome.welcome_message(from);
+                      console.log("initial message on list"+initialMessageSent)
                     }
                      
                     
