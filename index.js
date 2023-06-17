@@ -64,7 +64,7 @@ app.post("/webhook",async (req,res)=>{
                 let msg_body;
                 if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent &&selectedOption=="") {
                    msg_body = body_param.entry[0].changes[0].value.messages[0].text;
-                  initial= listMessage.list_message(from, async() => {
+                   listMessage.list_message(from, async() => {
                    console.log("Sending initial message");
                    console.log("initial message sent"+initialMessageSent);
                   initialMessageSent= true;
