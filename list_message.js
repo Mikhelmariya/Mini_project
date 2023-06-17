@@ -27,7 +27,7 @@ let data = JSON.stringify({
           "rows": [
             {
               "id": "<LIST_SECTION_1_ROW_1_ID>",
-              "title": "<SECTION_1_ROW_1_TITLE>",
+              "title": "Computer Science",
               "description": "<SECTION_1_ROW_1_DESC>"
             },
             {

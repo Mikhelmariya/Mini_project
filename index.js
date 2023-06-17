@@ -9,6 +9,7 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
+const initial_message=false;
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -65,7 +66,7 @@ app.post("/webhook",async (req,res)=>{
         console.log("Message from user : "+msg_body);
         console.log("user contact : "+from);
         console.log("id "+id);
-
+     if(initial_message==false){
         listMessage.list_message(from)
         .then(() => {
           console.log("List message sent successfully");
@@ -73,7 +74,15 @@ app.post("/webhook",async (req,res)=>{
         .catch((error) => {
           console.error("Error sending list message:", error);
         });
-    
+
+        if (body_param.entry[0].changes[0].value.messages[0].type === "interactive" &&
+        body_param.entry[0].changes[0].value.messages[0].interactive.type === "list_reply") {
+      // Extract the title and description from the list reply
+      const title = body_param.entry[0].changes[0].value.messages[0].interactive.list_reply.title;
+      console.log("title"+title);
+      initial_message=true;
+        
+      }
 
      try {
           console.log("Calling OpenAI");
@@ -124,7 +133,7 @@ app.post("/webhook",async (req,res)=>{
 
       }
              }
-      
+            }
             
    
 );
