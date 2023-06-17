@@ -177,7 +177,7 @@ app.post("/webhook",async (req,res)=>{
         } 
       
       }
-      initialMessageSent[from]=true;
+      
        
       ;
 
