@@ -50,7 +50,7 @@ app.post("/webhook",async (req,res)=>{
     console.log("Incoming webhook: " + JSON.stringify(body_param));
    if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
-        console.log("initial message"+initialMessageSent)
+        console.log("initial message before everything"+initialMessageSent)
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
@@ -67,8 +67,8 @@ app.post("/webhook",async (req,res)=>{
                   // Initial message
                   console.log("Initial message inside list loop: " + message.text.body);
                   listMessage.list_message(from);
-                  initialMessageSent = true;
-                } 
+              
+               } 
                 else if (message.interactive && message.interactive.type === "list_reply") {
                   // Interactive message
                   const optionId = message.interactive.list_reply.id;
@@ -76,8 +76,11 @@ app.post("/webhook",async (req,res)=>{
                   selectedOption = optionId;
                   if (optionId === "id1") {
                     await welcome.welcome_message(from);
+                  initialMessageSent=true;
+
                   }
                   initialMessageSent=true;
+                  console.log("selected option inside list message :"+selectedOption)
                   console.log("initial message inside text message content ;"+initialMessageSent)
                 } 
                 else if (message.text && selectedOption == "id1" && initialMessageSent) 
@@ -88,10 +91,10 @@ app.post("/webhook",async (req,res)=>{
                   console.log("user contact : "+from);
                   console.log("id "+id);
                   console.log("initial message ;"+initialMessageSent)
-
+                  let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
                   try {
                     console.log("Calling OpenAI");
-                    openaiResponse = await runPrompt("hii");
+                    openaiResponse = await runPrompt(msg_body);
                     console.log("openai response"+openaiResponse);
           
                  } catch (error) {
