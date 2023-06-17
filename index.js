@@ -80,7 +80,7 @@ app.post("/webhook",async (req,res)=>{
             if (selectedOption === "id1") {
               // Handle option 1 selection
               console.log("Option 1 selected");
-              msg_body="Computer science good?"
+              
               const openaiResponse = await runPrompt(msg_body);
               console.log("OpenAI response: " + openaiResponse);
   
