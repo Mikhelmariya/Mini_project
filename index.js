@@ -61,7 +61,7 @@ app.post("/webhook",async (req,res)=>{
                 let msg_body;
                 if (body_param.entry[0].changes[0].value.messages[0].text) {
   // For regular text messages
-  msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+  msg_body = body_param.entry[0].changes[0].value.messages[0].text;
 } else if (body_param.entry[0].changes[0].value.messages[0].interactive) {
   // For interactive messages
   msg_body = body_param.entry[0].changes[0].value.messages[0].interactive.text_input.text;
@@ -73,7 +73,7 @@ app.post("/webhook",async (req,res)=>{
         console.log("Message from user : "+msg_body);
         console.log("user contact : "+from);
         console.log("id "+id);
-
+        console.log("initial message ;"+initialMessageSent[from])
         if (!initialMessageSent[from]) {
           // Send the initial list message
           listMessage.list_message(from, async (selectedOption) => {
