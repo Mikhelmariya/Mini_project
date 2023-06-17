@@ -11,6 +11,7 @@ const config = new Configuration({
 
 const openai = new OpenAIApi(config);
  initialMessageSent = false;
+ selectedOption = "";
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -61,27 +62,31 @@ app.post("/webhook",async (req,res)=>{
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
                 let id =body_param.entry[0].changes[0].value.messages[0].id;
                 let msg_body;
-                if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent) {
+                if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent &&selectedOption=="") {
                    msg_body = body_param.entry[0].changes[0].value.messages[0].text;
-                   listMessage.list_message(from, async (selectedOption) => {
-                    if (selectedOption === "id1") {
+                   listMessage.list_message(from, async (option) => {
+                    if (option === "id1") {
                       // Handle option 1 selection
-                      console.log("Option 1 selected");
+                      selectedOption = option;
+                      console.log("Option 1 selected"+selectedOption);
                       welcome.welcome_message(from);
-                     }
+                      initialMessageSent= true;
+                    }
                      
-                     initialMessageSent= true;
+                    
                   });
           
                   
                  
-} else if (body_param.entry[0].changes[0].value.messages[0].interactive && initialMessageSent) {
-  // For interactive messages
-  msg_body = body_param.entry[0].changes[0].value.messages[0].interactive.text_input.text;
-  console.log("Calling OpenAI");
-  openaiResponse = await runPrompt("hii");
-}
-  else if(body_param.entry[0].changes[0].value.messages[0].text && initialMessageSent)
+} 
+
+// else if (body_param.entry[0].changes[0].value.messages[0].interactive && initialMessageSent) {
+//   // For interactive messages
+//   msg_body = body_param.entry[0].changes[0].value.messages[0].interactive.text_input.text;
+//   console.log("Calling OpenAI");
+//   openaiResponse = await runPrompt("hii");
+// }
+  else if(body_param.entry[0].changes[0].value.messages[0].text && initialMessageSent && selectedOption!="")
   
   {
        
