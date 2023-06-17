@@ -65,6 +65,8 @@ app.post("/webhook",async (req,res)=>{
                 if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent &&selectedOption=="") {
                    msg_body = body_param.entry[0].changes[0].value.messages[0].text;
                    listMessage.list_message(from, async (option) => {
+           console.log("inside list message, selected option callback is "+option);
+
                     if (option === "id1") {
                       // Handle option 1 selection
                       selectedOption = option;
