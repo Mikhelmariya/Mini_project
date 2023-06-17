@@ -63,7 +63,7 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                if (message.text && !initialMessageSent && selectedOption === "") {
+                if (message.text && !initialMessageSent && selectedOption == "") {
                   // Initial message
                   console.log("Initial message: " + message.text);
                   listMessage.list_message(from);
@@ -78,7 +78,7 @@ app.post("/webhook",async (req,res)=>{
                     await welcome.welcome_message(from);
                   }
                 } 
-                else if (message.text && initialMessageSent && selectedOption !== "")
+                else if (message.text && !initialMessageSent && selectedOption !== "")
   
                 { console.log("inside else if last ai")
                   console.log("Phone no id :"+phone_no_id);
