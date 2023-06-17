@@ -47,7 +47,7 @@ app.post("/webhook",async (req,res)=>{
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
-        console.log("initial message true or false  before everything"+cache.initialMessageSent)
+        console.log("initial message true or false  before everything"+initialMessageSent)
         console.log("selected option before everything"+selectedOption)
         
         if(body_param.entry && 
@@ -177,6 +177,7 @@ app.post("/webhook",async (req,res)=>{
         } 
       
       }
+      initialMessageSent=true;
        
       ;
 
