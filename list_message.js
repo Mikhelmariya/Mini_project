@@ -76,8 +76,7 @@ module.exports = {
     } catch (error) {
       console.log(error);
     }
-    initialMessageSent= true;
-    return initialMessageSent;
+    
     
     
 
