@@ -7,9 +7,7 @@ const listMessage = require("./list_message.js");
 const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
 
-
 let  selectedOption = " ";
-let initialMessageSent=false;
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -47,14 +45,14 @@ app.post("/webhook",async (req,res)=>{
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
-        console.log("initial message true or false  before everything"+initialMessageSent)
         console.log("selected option before everything"+selectedOption)
+        let initialMessageSent={};
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
              body_param.entry[0].changes[0].value.messages && 
              body_param.entry[0].changes[0].value.messages[0]){
-                
+                 initialMessageSent[from] = false;
                
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
                 const message = body_param.entry[0].changes[0].value.messages[0];
@@ -62,7 +60,7 @@ app.post("/webhook",async (req,res)=>{
                 const id = message.id;
                 if(message.text && !initialMessageSent && selectedOption == " "){
                   await listMessage.list_message(from, () => {
-                    initialMessageSent = true;
+                    initialMessageSent[from] = true;
                 });
                 }
 
@@ -177,7 +175,7 @@ app.post("/webhook",async (req,res)=>{
         } 
       
       }
-      initialMessageSent=true;
+      initialMessageSent[from]=true;
        
       ;
 
