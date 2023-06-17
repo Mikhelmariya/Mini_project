@@ -59,27 +59,27 @@ app.post("/webhook",async (req,res)=>{
                 
                
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
-                let from =body_param.entry[0].changes[0].value.messages[0].from;
-                let id =body_param.entry[0].changes[0].value.messages[0].id;
+                
+                const message = body_param.entry[0].changes[0].value.messages[0];
+                const from = message.from;
+                const id = message.id;
                 let msg_body;
-                if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent &&selectedOption=="")
-                  {
-                   msg_body = body_param.entry[0].changes[0].value.messages[0].text;
-                   listMessage.list_message(from);
-                   console.log("initial message sent"+initialMessageSent);
-                  } 
-               else if (body_param.interactive && body_param.interactive.list_reply && body_param.interactive.list_reply.id && initialMessageSent==false) 
-                 {
-                    selectedOption = body_param.interactive.list_reply.id;
-                    console.log("Option selected in index.js: " + selectedOption);
-                    initialMessageSent= true;
-                    console.log("initial message sent"+initialMessageSent);
-                     if (selectedOption === "id1") 
-                      {
-                      await welcome.welcome_message(from);
-                      }
-                }
-             else if(body_param.entry[0].changes[0].value.messages[0].text && initialMessageSent && selectedOption!="")
+                if (message.text && !initialMessageSent && selectedOption === "") {
+                  // Initial message
+                  console.log("Initial message: " + message.text);
+                  listMessage.list_message(from);
+                  initialMessageSent = true;
+                } 
+                else if (message.interactive && message.interactive.type === "list_reply") {
+                  // Interactive message
+                  const optionId = message.interactive.list_reply.id;
+                  console.log("Option selected: " + optionId);
+                  selectedOption = optionId;
+                  if (optionId === "id1") {
+                    await welcome.welcome_message(from);
+                  }
+                } 
+                else if (message.text && initialMessageSent && selectedOption !== "")
   
                 { 
                   console.log("Phone no id :"+phone_no_id);
