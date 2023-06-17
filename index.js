@@ -42,7 +42,7 @@ else{
 });
 
 app.post("/webhook",async (req,res)=>{
-    
+    initialMessageSent=true;
     const body_param = req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
@@ -72,7 +72,7 @@ app.post("/webhook",async (req,res)=>{
                   await welcome.welcome_message(from); 
 
                 }
-             else if(message.text && selectedOption!=""){
+             else if(message.text && initialMessageSent && selectedOption!=""){
                 let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
                 try {
                   console.log("Calling OpenAI");
