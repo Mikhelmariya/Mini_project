@@ -40,7 +40,7 @@ else{
 });
 
 app.post("/webhook",async (req,res)=>{
-    initialMessageSent=true;
+   
     const body_param = req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
