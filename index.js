@@ -63,7 +63,6 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                let msg_body;
                 if (message.text && !initialMessageSent && selectedOption === "") {
                   // Initial message
                   console.log("Initial message: " + message.text);
@@ -83,14 +82,14 @@ app.post("/webhook",async (req,res)=>{
   
                 { 
                   console.log("Phone no id :"+phone_no_id);
-                  console.log("Message from user : "+msg_body);
+                  console.log("Message from user : "+message.text);
                   console.log("user contact : "+from);
                   console.log("id "+id);
                   console.log("initial message ;"+initialMessageSent)
 
                   try {
                     console.log("Calling OpenAI");
-                    openaiResponse = await runPrompt(msg_body);
+                    openaiResponse = await runPrompt(message.text);
                     console.log("openai response"+openaiResponse);
           
                  } catch (error) {
