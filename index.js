@@ -65,7 +65,7 @@ app.post("/webhook",async (req,res)=>{
                 const id = message.id;
                 if (message.text && !initialMessageSent && selectedOption == "") {
                   // Initial message
-                  console.log("Initial message inside list loop: " + message.text);
+                  console.log("Initial message inside list loop: " + message.text.body);
                   listMessage.list_message(from);
                   initialMessageSent = true;
                 } 
