@@ -78,7 +78,7 @@ app.post("/webhook",async (req,res)=>{
                     await welcome.welcome_message(from);
                   }
                 } 
-                else if (message.text && !initialMessageSent && selectedOption !== "")
+                else if (message.text && selectedOption == "id1")
   
                 { console.log("inside else if last ai")
                   console.log("Phone no id :"+phone_no_id);
