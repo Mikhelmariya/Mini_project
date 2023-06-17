@@ -3,6 +3,7 @@ const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
 const listMessage = require("./list_message.js");
+const welcome_message=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
 const config = new Configuration({
     apiKey:process.env.OPENAI_API_KEY,
@@ -48,6 +49,7 @@ app.post("/webhook",async (req,res)=>{
     console.log("Incoming webhook: " + JSON.stringify(body_param));
    if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
+        console.log("initial message"+initialMessageSent)
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
@@ -65,7 +67,9 @@ app.post("/webhook",async (req,res)=>{
                     if (selectedOption === "id1") {
                       // Handle option 1 selection
                       console.log("Option 1 selected");
+                      welcome.welcome_message(from);
                      }
+                     
                      initialMessageSent= true;
                   });
           
