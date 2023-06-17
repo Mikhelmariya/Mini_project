@@ -1,4 +1,6 @@
+require('dotenv').config();
 const express = require("express");
+
 const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
@@ -15,7 +17,7 @@ let  selectedOption = "";
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
-require('dotenv').config();
+
 
 const myTocken="mikhel"
 app.get("/webhook",(req,res)=>{
