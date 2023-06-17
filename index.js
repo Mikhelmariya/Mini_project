@@ -47,6 +47,7 @@ app.post("/webhook",async (req,res)=>{
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
         console.log("initial message true or false  before everything"+initialMessageSent)
+        console.log("selected option before everything"+selectedOption)
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
@@ -58,17 +59,19 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                if(message.text && !initialMessageSent){
+                if(message.text && !initialMessageSent && selectedOption == " "){
                 listMessage.list_message(from);
                 initialMessageSent=true;
                 
                 }
 
                else if (message.interactive && message.interactive.type == "list_reply"){
+                 const optionId = message.interactive.list_reply.id;
+                 selectedOption = optionId;
                   await welcome.welcome_message(from); 
 
                 }
-             else if(message.text && initialMessageSent){
+             else if(message.text && selectedOption!=""){
                 let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
                 try {
                   console.log("Calling OpenAI");
