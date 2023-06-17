@@ -61,9 +61,9 @@ app.post("/webhook",async (req,res)=>{
                 const from = message.from;
                 const id = message.id;
                 if(message.text && !initialMessageSent && selectedOption == " "){
-               await  listMessage.list_message(from);
-                initialMessageSent=true;
-                
+                  await listMessage.list_message(from, () => {
+                    initialMessageSent = true;
+                });
                 }
 
                else if (message.interactive && message.interactive.type == "list_reply"){
