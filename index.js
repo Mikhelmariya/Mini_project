@@ -3,7 +3,7 @@ const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
 const listMessage = require("./list_message.js");
-const welcome_message=require("./welcome.js")
+const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
 const config = new Configuration({
     apiKey:process.env.OPENAI_API_KEY,
