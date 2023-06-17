@@ -9,7 +9,7 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
-const initialMessageSent = false;
+ initialMessageSent = false;
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
