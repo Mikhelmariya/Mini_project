@@ -83,6 +83,8 @@ app.post("/webhook",async (req,res)=>{
                   console.log("selected option inside list message :"+selectedOption)
                   console.log("initial message inside text message content ;"+initialMessageSent)
                 } 
+
+                else{
                  
   
                  console.log("inside else if last ai")
@@ -125,7 +127,7 @@ app.post("/webhook",async (req,res)=>{
               );
         } 
       
-        
+      }
        
         ;
 
