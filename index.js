@@ -58,30 +58,30 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-        if(!initialMessageSent){
-                if (message.text &&  selectedOption == " ") {
-                  // Initial message
-                  console.log("Initial message inside list loop: " + message.text.body);
-                  listMessage.list_message(from);
+        // if(!initialMessageSent){
+        //         if (message.text &&  selectedOption == " ") {
+        //           // Initial message
+        //           console.log("Initial message inside list loop: " + message.text.body);
+        //           listMessage.list_message(from);
               
-               } 
-                else if (message.interactive && message.interactive.type == "list_reply") {
-                  // Interactive message
-                  const optionId = message.interactive.list_reply.id;
-                  console.log("Option selected: " + optionId);
-                  selectedOption = optionId;
-                  if (optionId === "id1") {
-                  await welcome.welcome_message(from);
-                  initialMessageSent=true;
-                  console.log("selected option inside list message :"+selectedOption)
-                  console.log("initial message inside text message content ;"+initialMessageSent)
+        //        } 
+        //         else if (message.interactive && message.interactive.type == "list_reply") {
+        //           // Interactive message
+        //           const optionId = message.interactive.list_reply.id;
+        //           console.log("Option selected: " + optionId);
+        //           selectedOption = optionId;
+        //           if (optionId === "id1") {
+        //           await welcome.welcome_message(from);
+        //           initialMessageSent=true;
+        //           console.log("selected option inside list message :"+selectedOption)
+        //           console.log("initial message inside text message content ;"+initialMessageSent)
 
-                  }
+        //           }
                   
-                } 
-                initialMessageSent=true;
+        //         } 
+        //         initialMessageSent=true;
 
-        }
+        // }
         
                 
                 
