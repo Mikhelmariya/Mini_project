@@ -65,7 +65,7 @@ app.post("/webhook",async (req,res)=>{
                 const id = message.id;
                 if (message.text && !initialMessageSent && selectedOption == "") {
                   // Initial message
-                  console.log("Initial message: " + message.text);
+                  console.log("Initial message inside list loop: " + message.text);
                   listMessage.list_message(from);
                   initialMessageSent = true;
                 } 
@@ -77,8 +77,10 @@ app.post("/webhook",async (req,res)=>{
                   if (optionId === "id1") {
                     await welcome.welcome_message(from);
                   }
+                  initialMessageSent=true;
+                  console.log("initial message inside text message content ;"+initialMessageSent)
                 } 
-                else if (message.text && selectedOption == "id1")
+                else if (message.text && selectedOption == "id1" && initialMessageSent) 
   
                 { console.log("inside else if last ai")
                   console.log("Phone no id :"+phone_no_id);
