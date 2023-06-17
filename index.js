@@ -67,30 +67,9 @@ app.post("/webhook",async (req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
 
-        const queue = [];
-        let isProcessing = false;
-        queue.push({ msg_body, from }); // Enqueue the query
-
-    
-        
-         const processQueue = async () => {
-          console.log("proscess queue inside");
-          if (isProcessing || queue.length === 0) {
-            console.log("Queue is empty or is being processed");
-          }
-          else{
-          isProcessing = true;
-          const { msg_body, from } = queue.shift();
-          }
-        
-          
-        
-      try {
+     try {
           console.log("Calling OpenAI");
           openaiResponse = await runPrompt(msg_body);
-          if (openaiResponse === "") {
-            openaiResponse = "Can u reeat.";
-          }
           console.log("openai response"+openaiResponse);
 
        } catch (error) {
@@ -101,7 +80,7 @@ app.post("/webhook",async (req,res)=>{
       }
          
           reply = openaiResponse.trim();
-          console.log("Reply from ai : "+reply);
+          
           
         
         
@@ -126,14 +105,13 @@ app.post("/webhook",async (req,res)=>{
           }
         );
 
-        isProcessing = false;
+        
+      
         
        
         };
 
-        if (!isProcessing && queue.length > 0) {
-          processQueue(); // Start processing the queue if it's not already being processed
-        }
+       
 
       
     
@@ -142,7 +120,7 @@ app.post("/webhook",async (req,res)=>{
 
       }
              }
-      }
+      
             
    
 );
