@@ -53,7 +53,7 @@ app.post("/webhook",async (req,res)=>{
             body_param.entry[0].changes[0]&&
              body_param.entry[0].changes[0].value.messages && 
              body_param.entry[0].changes[0].value.messages[0]){
-                 initialMessageSent[from] = false;
+                 
                
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
                 const message = body_param.entry[0].changes[0].value.messages[0];
