@@ -3,7 +3,7 @@ const axios = require('axios');
 
 module.exports = {
   list_message: async function(from) {
-    console.log("inside list message, selected option callback is "+callback);
+   // console.log("inside list message, selected option callback is "+callback);
     const data = JSON.stringify({
       messaging_product: 'whatsapp',
       recipient_type: 'individual',
