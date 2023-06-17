@@ -7,7 +7,7 @@ const listMessage = require("./list_message.js");
 const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
 
-let initialMessageSent = false;
+
 let  selectedOption = " ";
 
 const port=process.env.PORT || 8000;
@@ -39,7 +39,9 @@ else{
 
 
 });
-
+const cache = {
+  initialMessageSent: false,
+};
 app.post("/webhook",async (req,res)=>{
     
     const body_param = req.body;
@@ -59,9 +61,9 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                if(message.text && !initialMessageSent && selectedOption == " "){
+                if(message.text && !cache.initialMessageSent && selectedOption == " "){
                 listMessage.list_message(from);
-                initialMessageSent=true;
+                cache.initialMessageSent=true;
                 
                 }
 
