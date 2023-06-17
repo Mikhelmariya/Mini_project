@@ -1,25 +1,19 @@
 require('dotenv').config();
 const express = require("express");
-
 const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
 const listMessage = require("./list_message.js");
 const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
-const config = new Configuration({
-    apiKey:process.env.OPENAI_API_KEY,
-});
 
-const openai = new OpenAIApi(config);
- let initialMessageSent = false;
-let  selectedOption = "";
+let initialMessageSent = false;
+let  selectedOption = " ";
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
-
-
 const myTocken="mikhel"
+
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
 let challange= req.query["hub.challenge"];
@@ -50,9 +44,9 @@ app.post("/webhook",async (req,res)=>{
     
     const body_param = req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
-   if(body_param.object){
+    if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
-        console.log("initial message before everything"+initialMessageSent)
+        console.log("initial message true or false  before everything"+initialMessageSent)
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
@@ -61,11 +55,11 @@ app.post("/webhook",async (req,res)=>{
                 
                
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
-                
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                if (message.text && !initialMessageSent && selectedOption == "") {
+        if(!initialMessageSent){
+                if (message.text &&  selectedOption == " ") {
                   // Initial message
                   console.log("Initial message inside list loop: " + message.text.body);
                   listMessage.list_message(from);
@@ -77,19 +71,23 @@ app.post("/webhook",async (req,res)=>{
                   console.log("Option selected: " + optionId);
                   selectedOption = optionId;
                   if (optionId === "id1") {
-                    await welcome.welcome_message(from);
-                  initialMessageSent=true;
-
-                  }
+                  await welcome.welcome_message(from);
                   initialMessageSent=true;
                   console.log("selected option inside list message :"+selectedOption)
                   console.log("initial message inside text message content ;"+initialMessageSent)
-                } 
 
-                else{
+                  }
+                  
+                } 
+                initialMessageSent=true;
+
+        }
+        else{
+                
+                
                  
   
-                 console.log("inside else if last ai")
+                  
                   console.log("Phone no id :"+phone_no_id);
                   console.log("Message from user : "+message.text);
                   console.log("user contact : "+from);
@@ -131,7 +129,7 @@ app.post("/webhook",async (req,res)=>{
       
       }
        
-        ;
+     } ;
 
        
 
@@ -142,7 +140,7 @@ app.post("/webhook",async (req,res)=>{
 
       
              }
- }
+ 
             
    
 );
