@@ -72,7 +72,9 @@ app.post("/webhook",async (req,res)=>{
           listMessage.list_message(from, async (selectedOption) => {
             if (selectedOption === "id1") {
               // Handle option 1 selection
-              const openaiResponse = await runPrompt("Hii");
+              console.log("Option 1 selected");
+              msg_body="Computer science good?"
+              const openaiResponse = await runPrompt(msg_body);
               console.log("OpenAI response: " + openaiResponse);
   
               // Send the OpenAI response as a reply
