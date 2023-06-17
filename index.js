@@ -69,7 +69,35 @@ app.post("/webhook",async (req,res)=>{
 
         if (!initialMessageSent[from]) {
           // Send the initial list message
-          await listMessage.list_message(from);
+          listMessage.list_message(from, async (selectedOption) => {
+            if (selectedOption === "id1") {
+              // Handle option 1 selection
+              const openaiResponse = await runPrompt("Hii");
+              console.log("OpenAI response: " + openaiResponse);
+  
+              // Send the OpenAI response as a reply
+              await axios.post(
+                process.env.WHATSAPP_SEND_MESSAGE_API,
+                {
+                  messaging_product: "whatsapp",
+                  recipient_type: "individual",
+                  to: from,
+                  type: "text",
+                  text: {
+                    preview_url: false,
+                    body: openaiResponse.trim(),
+                  },
+                },
+                {
+                  headers: {
+                    Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
+                  },
+                }
+              );
+            }
+          });
+  
+          
           initialMessageSent[from] = true;
         } else {
    
