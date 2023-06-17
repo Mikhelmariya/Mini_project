@@ -83,9 +83,9 @@ app.post("/webhook",async (req,res)=>{
                   console.log("selected option inside list message :"+selectedOption)
                   console.log("initial message inside text message content ;"+initialMessageSent)
                 } 
-                else if (message.text && selectedOption == "id1" && initialMessageSent) 
+                 
   
-                { console.log("inside else if last ai")
+                 console.log("inside else if last ai")
                   console.log("Phone no id :"+phone_no_id);
                   console.log("Message from user : "+message.text);
                   console.log("user contact : "+from);
@@ -127,7 +127,7 @@ app.post("/webhook",async (req,res)=>{
       
         
        
-        };
+        ;
 
        
 
