@@ -63,10 +63,45 @@ app.post("/webhook",async (req,res)=>{
                 initialMessageSent=true;
                 
                 }
-                else if (message.interactive && message.interactive.type == "list_reply"){
+
+               else if (message.interactive && message.interactive.type == "list_reply"){
                   await welcome.welcome_message(from); 
 
                 }
+             else if(message.text && initialMessageSent){
+                let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+                try {
+                  console.log("Calling OpenAI");
+                  openaiResponse = await runPrompt(msg_body);
+                  console.log("openai response"+openaiResponse);
+        
+               } catch (error) {
+                  console.error("Error calling OpenAI:", error);
+                  console.error("OpenAI Error Response:", error.response.data);
+                  console.error("OpenAI Error Status:", error.response.status);
+                  console.error("OpenAI Error Headers:", error.response.headers);
+              }
+              
+            reply = openaiResponse.trim();
+            await axios.post(
+              process.env.WHATSAPP_SEND_MESSAGE_API,
+              {
+                messaging_product: "whatsapp",
+                recipient_type: "individual",
+                to: from,
+                type: "text",
+                text: {
+                  preview_url: false,
+                  body: reply,
+                },
+              },
+              {
+                headers: {
+                  Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
+                },
+              }
+            );
+              }
 
         // if(!initialMessageSent){
         //         if (message.text &&  selectedOption == " ") {
@@ -97,44 +132,44 @@ app.post("/webhook",async (req,res)=>{
                 
                  
   
-                  console.log("initial message true or false after loop"+initialMessageSent)
-                  console.log("Phone no id :"+phone_no_id);
-                  console.log("Message from user : "+message.text);
-                  console.log("user contact : "+from);
-                  console.log("id "+id);
-                  console.log("initial message ;"+initialMessageSent)
-                  let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
-                  try {
-                    console.log("Calling OpenAI");
-                    openaiResponse = await runPrompt(msg_body);
-                    console.log("openai response"+openaiResponse);
+              //     console.log("initial message true or false after loop"+initialMessageSent)
+              //     console.log("Phone no id :"+phone_no_id);
+              //     console.log("Message from user : "+message.text);
+              //     console.log("user contact : "+from);
+              //     console.log("id "+id);
+              //     console.log("initial message ;"+initialMessageSent)
+              //     let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+              //     try {
+              //       console.log("Calling OpenAI");
+              //       openaiResponse = await runPrompt(msg_body);
+              //       console.log("openai response"+openaiResponse);
           
-                 } catch (error) {
-                    console.error("Error calling OpenAI:", error);
-                    console.error("OpenAI Error Response:", error.response.data);
-                    console.error("OpenAI Error Status:", error.response.status);
-                    console.error("OpenAI Error Headers:", error.response.headers);
-                }
+              //    } catch (error) {
+              //       console.error("Error calling OpenAI:", error);
+              //       console.error("OpenAI Error Response:", error.response.data);
+              //       console.error("OpenAI Error Status:", error.response.status);
+              //       console.error("OpenAI Error Headers:", error.response.headers);
+              //   }
                 
-              reply = openaiResponse.trim();
-              await axios.post(
-                process.env.WHATSAPP_SEND_MESSAGE_API,
-                {
-                  messaging_product: "whatsapp",
-                  recipient_type: "individual",
-                  to: from,
-                  type: "text",
-                  text: {
-                    preview_url: false,
-                    body: reply,
-                  },
-                },
-                {
-                  headers: {
-                    Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
-                  },
-                }
-              );
+              // reply = openaiResponse.trim();
+              // await axios.post(
+              //   process.env.WHATSAPP_SEND_MESSAGE_API,
+              //   {
+              //     messaging_product: "whatsapp",
+              //     recipient_type: "individual",
+              //     to: from,
+              //     type: "text",
+              //     text: {
+              //       preview_url: false,
+              //       body: reply,
+              //     },
+              //   },
+              //   {
+              //     headers: {
+              //       Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
+              //     },
+              //   }
+              // );
         } 
       
       }
