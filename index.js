@@ -10,8 +10,8 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
- initialMessageSent = false;
- selectedOption = "";
+ let initialMessageSent = false;
+let  selectedOption = "";
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -45,7 +45,7 @@ else{
 });
 
 app.post("/webhook",async (req,res)=>{
-
+    
     const body_param = req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
    if(body_param.object){
@@ -69,11 +69,11 @@ app.post("/webhook",async (req,res)=>{
                       // Handle option 1 selection
                       selectedOption = option;
                       console.log("Option  selected in index.js"+selectedOption);
-                      initialMessageSent= true;
                       await welcome.welcome_message(from);
                       console.log("initial message on list"+initialMessageSent)
                     }
                      
+                    initialMessageSent= true;
                     
                   });
           
