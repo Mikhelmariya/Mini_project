@@ -9,7 +9,7 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
-const initialMessageSent = {};
+const initialMessageSent = false;
 
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
@@ -73,8 +73,8 @@ app.post("/webhook",async (req,res)=>{
         console.log("Message from user : "+msg_body);
         console.log("user contact : "+from);
         console.log("id "+id);
-        console.log("initial message ;"+initialMessageSent[from])
-        if (!initialMessageSent[from]) {
+        console.log("initial message ;"+initialMessageSent)
+        if (!initialMessageSent) {
           // Send the initial list message
           listMessage.list_message(from, async (selectedOption) => {
             if (selectedOption === "id1") {
@@ -107,7 +107,7 @@ app.post("/webhook",async (req,res)=>{
           });
   
           
-          initialMessageSent[from] = true;
+          initialMessageSent= true;
         } else {
    
 
