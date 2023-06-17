@@ -80,7 +80,7 @@ app.post("/webhook",async (req,res)=>{
                 } 
                 else if (message.text && initialMessageSent && selectedOption !== "")
   
-                { 
+                { console.log("inside else if last ai")
                   console.log("Phone no id :"+phone_no_id);
                   console.log("Message from user : "+message.text);
                   console.log("user contact : "+from);
@@ -89,7 +89,7 @@ app.post("/webhook",async (req,res)=>{
 
                   try {
                     console.log("Calling OpenAI");
-                    openaiResponse = await runPrompt(message.text);
+                    openaiResponse = await runPrompt("hii");
                     console.log("openai response"+openaiResponse);
           
                  } catch (error) {
