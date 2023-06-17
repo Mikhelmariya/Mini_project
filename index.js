@@ -67,7 +67,7 @@ app.post("/webhook",async (req,res)=>{
                   initial= listMessage.list_message(from, async() => {
                    console.log("Sending initial message");
                    console.log("initial message sent"+initialMessageSent);
-
+                  initialMessageSent= true;
                     
                   });
                   console.log("initial message sent"+initialMessageSent);
