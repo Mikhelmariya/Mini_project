@@ -69,7 +69,7 @@ app.post("/webhook",async (req,res)=>{
                   listMessage.list_message(from);
               
                } 
-                else if (message.interactive && message.interactive.type === "list_reply") {
+                else if (message.interactive && message.interactive.type == "list_reply") {
                   // Interactive message
                   const optionId = message.interactive.list_reply.id;
                   console.log("Option selected: " + optionId);
