@@ -64,24 +64,27 @@ app.post("/webhook",async (req,res)=>{
                 let msg_body;
                 if (body_param.entry[0].changes[0].value.messages[0].text && !initialMessageSent &&selectedOption=="") {
                    msg_body = body_param.entry[0].changes[0].value.messages[0].text;
-                   listMessage.list_message(from, async (option) => {
-           console.log("inside list message, selected option callback is "+option);
+                  initial= listMessage.list_message(from, async() => {
+                   console.log("Sending initial message");
+                   console.log("initial message sent"+initialMessageSent);
 
-                    if (option === "id1") {
-                      // Handle option 1 selection
-                      selectedOption = option;
-                      console.log("Option  selected in index.js"+selectedOption);
-                      await welcome.welcome_message(from);
-                      console.log("initial message on list"+initialMessageSent)
-                    }
-                     
-                    initialMessageSent= true;
                     
                   });
+                  console.log("initial message sent"+initialMessageSent);
+
           
                   
                  
 } 
+else if (body_param.interactive && body_param.interactive.list_reply && body_param.interactive.list_reply.id) {
+  selectedOption = body_param.interactive.list_reply.id;
+  console.log("Option selected in index.js: " + selectedOption);
+  if (selectedOption === "id1") {
+    // Handle option 1 selection
+    await welcome.welcome_message(from);
+    console.log("initial message on list"+initialMessageSent)
+  }
+}
 
 // else if (body_param.entry[0].changes[0].value.messages[0].interactive && initialMessageSent) {
 //   // For interactive messages
