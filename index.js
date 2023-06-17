@@ -58,7 +58,14 @@ app.post("/webhook",async (req,res)=>{
                 let phone_no_id = body_param.entry[0].changes[0].value.metadata.phone_number_id;
                 let from =body_param.entry[0].changes[0].value.messages[0].from;
                 let id =body_param.entry[0].changes[0].value.messages[0].id;
-                let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+                let msg_body;
+                if (body_param.entry[0].changes[0].value.messages[0].text) {
+  // For regular text messages
+  msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
+} else if (body_param.entry[0].changes[0].value.messages[0].interactive) {
+  // For interactive messages
+  msg_body = body_param.entry[0].changes[0].value.messages[0].interactive.text_input.text;
+}
           
        
                 
