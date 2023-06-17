@@ -82,12 +82,12 @@ app.post("/webhook",async (req,res)=>{
                 initialMessageSent=true;
 
         }
-        else{
+        
                 
                 
                  
   
-                  
+                  console.log("initial message true or false after loop"+initialMessageSent)
                   console.log("Phone no id :"+phone_no_id);
                   console.log("Message from user : "+message.text);
                   console.log("user contact : "+from);
@@ -129,7 +129,7 @@ app.post("/webhook",async (req,res)=>{
       
       }
        
-     } ;
+      ;
 
        
 
