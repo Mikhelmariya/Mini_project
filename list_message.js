@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-let initialMessageSent = {};
+
 module.exports = {
   list_message: async function(from,callback) {
    // console.log("inside list message, selected option callback is "+callback);
@@ -82,7 +82,7 @@ module.exports = {
     }
     
     // Update the initial message status for the user
-    initialMessageSent[from] = true;
+    
 
 },
 };

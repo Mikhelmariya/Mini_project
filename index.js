@@ -8,7 +8,7 @@ const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
 
 let  selectedOption = " ";
-
+var initialMessageSent=false;
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 const myTocken="mikhel"
@@ -46,7 +46,8 @@ app.post("/webhook",async (req,res)=>{
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
         console.log("selected option before everything"+selectedOption)
-        let initialMessageSent={};
+        console.log("initial message before everything"+initialMessageSent)
+    
         
         if(body_param.entry && 
             body_param.entry[0].changes[0]&&
@@ -60,7 +61,8 @@ app.post("/webhook",async (req,res)=>{
                 const id = message.id;
                 if(message.text && !initialMessageSent && selectedOption == " "){
                   await listMessage.list_message(from, () => {
-                    initialMessageSent[from] = true;
+                    initialMessageSent = true;
+                    console.log("initial  "+initialMessageSent)
                 });
                 }
 
