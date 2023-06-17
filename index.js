@@ -2,6 +2,7 @@ const express = require("express");
 const body_parser = require("body-parser");
 const axios = require("axios");
 const runPrompt = require("./contoller.js");
+const listMessage = require("./list_message.js");
 const{Configuration, OpenAIApi}=require("openai");
 const config = new Configuration({
     apiKey:process.env.OPENAI_API_KEY,
@@ -43,10 +44,8 @@ else{
 app.post("/webhook",async (req,res)=>{
 
     const body_param = req.body;
-    //check the incoming webhook message 
     console.log("Incoming webhook: " + JSON.stringify(body_param));
-   // Validate the webhook
-    if(body_param.object){
+   if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
         
         if(body_param.entry && 
@@ -67,6 +66,15 @@ app.post("/webhook",async (req,res)=>{
         console.log("user contact : "+from);
         console.log("id "+id);
 
+        listMessage.list_message(from)
+        .then(() => {
+          console.log("List message sent successfully");
+        })
+        .catch((error) => {
+          console.error("Error sending list message:", error);
+        });
+    
+
      try {
           console.log("Calling OpenAI");
           openaiResponse = await runPrompt(msg_body);
@@ -82,11 +90,7 @@ app.post("/webhook",async (req,res)=>{
           reply = openaiResponse.trim();
           
           
-        
-        
-
-        
-       await axios.post(
+      await axios.post(
           process.env.WHATSAPP_SEND_MESSAGE_API,
           {
             messaging_product: "whatsapp",

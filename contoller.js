@@ -5,7 +5,7 @@ const config = new Configuration({
 });
 
 const openai = new OpenAIApi(config);
-let conversation = [];
+
 
 const runPrompt = async(prompt_message) =>{
     let conversation = [];
