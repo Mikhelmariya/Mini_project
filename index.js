@@ -59,20 +59,20 @@ app.post("/webhook",async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                if(message.text && !initialMessageSent && selectedOption == " "){
-                  await listMessage.list_message(from, () => {
-                    initialMessageSent = true;
-                    console.log("initial  "+initialMessageSent)
-                });
-                }
+                // if(message.text && !initialMessageSent && selectedOption == " "){
+                //   await listMessage.list_message(from, () => {
+                //     initialMessageSent = true;
+                //     console.log("initial  "+initialMessageSent)
+                // });
+                // }
 
-               else if (message.interactive && message.interactive.type == "list_reply"){
-                 const optionId = message.interactive.list_reply.id;
-                 selectedOption = optionId;
-                  await welcome.welcome_message(from); 
+              //  else if (message.interactive && message.interactive.type == "list_reply"){
+              //    const optionId = message.interactive.list_reply.id;
+              //    selectedOption = optionId;
+              //     await welcome.welcome_message(from); 
 
-                }
-             else if(message.text && initialMessageSent && selectedOption!=""){
+              //   }
+              
                 let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
                 try {
                   console.log("Calling OpenAI");
@@ -95,7 +95,7 @@ app.post("/webhook",async (req,res)=>{
                 to: from,
                 type: "text",
                 text: {
-                  preview_url: false,
+                  preview_url: true,
                   body: reply,
                 },
               },
@@ -177,10 +177,9 @@ app.post("/webhook",async (req,res)=>{
         } 
       
       }
-      
+        
        
-      ;
-
+      
        
 
       
@@ -189,7 +188,7 @@ app.post("/webhook",async (req,res)=>{
    
 
       
-             }
+             
  
             
    
