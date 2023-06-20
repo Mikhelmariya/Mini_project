@@ -41,7 +41,7 @@ else{
 
 app.post("/webhook",async (req,res)=>{
    
-    const body_param = req.body;
+    const body_param = await req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
         console.log(body_param.entry[0].changes[0].value.messages[0]);
