@@ -6,12 +6,19 @@ const runPrompt = require("./contoller.js");
 const listMessage = require("./list_message.js");
 const welcome=require("./welcome.js")
 const{Configuration, OpenAIApi}=require("openai");
+const rateLimit = require("express-rate-limit");
 
 let  selectedOption = " ";
 var initialMessageSent=false;
 const port=process.env.PORT || 8000;
 const app=express().use(body_parser.json());
 const myTocken="mikhel"
+
+const limiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 5, // 10 requests per minute
+  message: "Too many requests from this IP, please try again later.",
+});
 
 app.get("/webhook",(req,res)=>{
 let mode= req.query["hub.mode"]
@@ -39,7 +46,7 @@ else{
 
 });
 
-app.post("/webhook",async (req,res)=>{
+app.post("/webhook",limiter,async (req,res)=>{
    try{
     const body_param = await req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
