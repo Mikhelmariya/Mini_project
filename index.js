@@ -66,55 +66,68 @@ app.post("/webhook",limiter,async (req,res)=>{
                 const message = body_param.entry[0].changes[0].value.messages[0];
                 const from = message.from;
                 const id = message.id;
-                // if(message.text && !initialMessageSent && selectedOption == " "){
-                //   await listMessage.list_message(from, () => {
-                //     initialMessageSent = true;
-                //     console.log("initial  "+initialMessageSent)
-                // });
-                // }
-
-              //  else if (message.interactive && message.interactive.type == "list_reply"){
-              //    const optionId = message.interactive.list_reply.id;
-              //    selectedOption = optionId;
-              //     await welcome.welcome_message(from); 
-
-              //   }
+                
               
                 let msg_body = body_param.entry[0].changes[0].value.messages[0].text.body;
-                try {
-                  console.log("Calling OpenAI");
-                  openaiResponse = await runPrompt(msg_body);
-                  console.log("openai response"+openaiResponse);
-        
-               } catch (error) {
-                  console.error("Error calling OpenAI:", error);
-                  console.error("OpenAI Error Response:", error.response.data);
-                  console.error("OpenAI Error Status:", error.response.status);
-                  console.error("OpenAI Error Headers:", error.response.headers);
-              }
+                if (shouldGenerateResponse(msg_body)){
+                  try {
+                    console.log("Calling OpenAI");
+                    openaiResponse = await runPrompt(msg_body);
+                    console.log("openai response"+openaiResponse);
+          
+                 } catch (error) {
+                    console.error("Error calling OpenAI:", error);
+                    console.error("OpenAI Error Response:", error.response.data);
+                    console.error("OpenAI Error Status:", error.response.status);
+                    console.error("OpenAI Error Headers:", error.response.headers);
+                }
+
+                reply = openaiResponse.trim();
+                await sendResponseToUser(from, reply);
               
-            reply = openaiResponse.trim();
-            await axios.post(
-              process.env.WHATSAPP_SEND_MESSAGE_API,
-              {
-                messaging_product: "whatsapp",
-                recipient_type: "individual",
-                to: from,
-                type: "text",
-                text: {
-                  preview_url: true,
-                  body: reply,
-                },
-              },
-              {
-                headers: {
-                  Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
-                },
+                }
+             
               }
-            );
+    }
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error handling webhook:", error);
+    res.sendStatus(500);
+  }
+
+            function shouldGenerateResponse(message) {
+              // Check if the message is not empty and contains user input
+              // Modify this condition based on your specific requirements
+              return message && message.trim().length > 0;
+            }
+            async function sendResponseToUser(recipient, response) {
+              try{
+                await axios.post(
+                  process.env.WHATSAPP_SEND_MESSAGE_API,
+                  {
+                    messaging_product: "whatsapp",
+                    recipient_type: "individual",
+                    to: recipient,
+                    type: "text",
+                    text: {
+                      preview_url: true,
+                      body: response,
+                    },
+                  },
+                  {
+                    headers: {
+                      Authorization: "Bearer " + process.env.WHATSAPP_ACCESS_TOKEN,
+                    },
+                  }
+                );
+              }catch(error){
+                console.log(error);
+              }
+            }
+           
               }
 
-        // if(!initialMessageSent){
+     
         //         if (message.text &&  selectedOption == " ") {
         //           // Initial message
         //           console.log("Initial message inside list loop: " + message.text.body);
@@ -181,12 +194,9 @@ app.post("/webhook",limiter,async (req,res)=>{
               //     },
               //   }
               // );
-        } } catch (error) {
-          console.error("Error handling webhook:", error);
-          res.sendStatus(500);
-        }
+        
    
-      }
+      
   );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
