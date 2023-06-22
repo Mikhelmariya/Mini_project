@@ -40,7 +40,7 @@ else{
 });
 
 app.post("/webhook",async (req,res)=>{
-   
+   try{
     const body_param = await req.body;
     console.log("Incoming webhook: " + JSON.stringify(body_param));
     if(body_param.object){
@@ -174,25 +174,13 @@ app.post("/webhook",async (req,res)=>{
               //     },
               //   }
               // );
-        } 
-      
+        } } catch (error) {
+          console.error("Error handling webhook:", error);
+          res.sendStatus(500);
+        }
+   
       }
-        
-       
-      
-       
-
-      
-    
-    
-   
-
-      
-             
- 
-            
-   
-);
+  );
 app.get("/",(req,res)=>{
     console.log(`${req.ip} is asking for /`)
     res.status(200).send("This is webhook setting up");
