@@ -26,7 +26,7 @@ const runPrompt = async(prompt_message) =>{
         {role:'user', content:'Here i am giving some website details.For queries regarding the following data respond with the appropiate links etlab:https://www.tkmce.etlab.in/user/login ,Ktu login :https://app.ktu.edu.in/login.htm, Result checking:https://ktu.edu.in/eu/res/viewExamStudentResults.htm, placement details of seniors(2022):https://tkmce.ac.in/uploads/placement/PLACEMENT%20STATUS%202021-22.pdf , iedc:https://www.instagram.com/iedc_tkmce/, Literary and Debate Club :https://www.instagram.com/litdeb_tkmce/, Sports Club:https://www.instagram.com/tkmce_sports_fraternity/, ISTE TKMCE:https://www.instagram.com/iste_tkmce_/, Hestia (hestia is not a club it a techno cultural fest ):https://www.instagram.com/hestia.tkmce/(instagram), CSI SB TKMCE:https://www.instagram.com/csi_tkmce/, TinkerHub TKMCE: https://www.instagram.com/tinkerhub_tkmce/, CSE TKMCE:https://www.instagram.com/cse_tkmce/, , GDSC TKMCE:https://www.instagram.com/gdsc.tkmce/'},
         {role: 'user', content:'emergecy contact detail are given here: Principal 0474-2712022, 9847072024. College Office 0474-2712024, 0474-2713129, 0474-2711591. College Gate 0474-2712024 .Campus Doctor 7025055633 .College Vehicle (For Emergency) 0474-2713126. Administrative Officer 04742713126, 04742708353. Library 04742713933. Placement Cell 0474271312. Help Desk (Maintenance) 9446235854. Hospitals Medicity 0474-2721520, 2721519. N.S. Hospital 0474-2723199. District Hospital 0474-2768667. Police 100, 0474-2711155. '},
         { role: 'user', content: 'What are the upcoming hackathons or technical events at TKM College of Engineering?' },
-        { role: 'assistant', content: 'I apologize, but I dont have access to the latest information about upcoming hackathons or technical events at TKM College of Engineering. It is best to stay updated by checking the official college website, social media platforms, or contacting the concerned department or student organizations. They usually provide timely updates regarding such events. Additionally, keeping an eye on local tech communities, forums, and popular hackathon platforms can also help you discover exciting opportunities beyond the college. If theres anything else I can assist you with, please let me know!' }
+        { role: 'assistant', content: 'Give an apology message saying you dont have access to this information' }
     ];
     
     
@@ -34,7 +34,7 @@ const runPrompt = async(prompt_message) =>{
     const response= await openai.createChatCompletion({
         model:"gpt-3.5-turbo",
         messages: conversation.concat({role:'user',content:prompt_message}),
-        max_tokens: 100,
+        max_tokens: 20,
         temperature: 0.2,
     
         
