@@ -34,7 +34,7 @@ const runPrompt = async(prompt_message) =>{
     const response= await openai.createChatCompletion({
         model:"gpt-3.5-turbo",
         messages: conversation.concat({role:'user',content:prompt_message}),
-        max_tokens: 3,
+        max_tokens: 200,
         temperature: 0.2,
     
         
